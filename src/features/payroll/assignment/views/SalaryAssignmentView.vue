@@ -13,7 +13,7 @@ import {
 } from '@mts241alikhlash/ui/alert-dialog'
 import { Button, buttonVariants } from '@mts241alikhlash/ui/button'
 import { Card, CardHeader, CardTitle } from '@mts241alikhlash/ui/card'
-import { Plus, Users } from 'lucide-vue-next'
+import { Plus, Users } from '@lucide/vue'
 import { computed, onMounted, ref, watch } from 'vue'
 import { salaryComponentService } from '../../component'
 import AssignSalaryDialog from '../components/AssignSalaryDialog.vue'

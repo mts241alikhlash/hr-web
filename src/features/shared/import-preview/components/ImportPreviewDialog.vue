@@ -24,7 +24,7 @@ import {
   CheckCircle2,
   ChevronDown,
   Loader2,
-} from 'lucide-vue-next'
+} from '@lucide/vue'
 import type { ImportColumnDescriptor, ImportPreviewRow } from '../types'
 import { buildResolveDecisions } from '../logic/buildResolveDecisions'
 import { buildImportColumns } from '../logic/buildImportColumns'

@@ -19,7 +19,7 @@ import {
   SelectValue,
 } from '@mts241alikhlash/ui/select'
 import { Textarea } from '@mts241alikhlash/ui/textarea'
-import { Plus } from 'lucide-vue-next'
+import { Plus } from '@lucide/vue'
 import { computed, onMounted, ref } from 'vue'
 import { toast } from 'vue-sonner'
 import { createMyLeaveColumns } from '../components/myLeaveColumns'

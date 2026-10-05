@@ -21,7 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@mts241alikhlash/ui/select'
-import { CalendarPlus, Check } from 'lucide-vue-next'
+import { CalendarPlus, Check } from '@lucide/vue'
 import { computed, onMounted, ref, watch } from 'vue'
 import { toast } from 'vue-sonner'
 import { createNonWorkingDayColumns } from '../components/nonWorkingDayColumns'

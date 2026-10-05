@@ -10,7 +10,7 @@ import {
   AlertDialogTitle,
 } from '@mts241alikhlash/ui/alert-dialog'
 import { Button } from '@mts241alikhlash/ui/button'
-import { CheckCircle2, Lock, RefreshCw, Send } from 'lucide-vue-next'
+import { CheckCircle2, Lock, RefreshCw, Send } from '@lucide/vue'
 import { ref } from 'vue'
 import { isWorking, payrollRunService } from '../services/payrollRunService'
 import type { PayrollRun } from '../types'

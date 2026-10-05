@@ -13,7 +13,7 @@ import {
 import { useRoleGuard } from '@/features/platform/auth'
 import { getIndonesianErrorMessage } from '@mts241alikhlash/web-shared/utils/error-handler'
 import { watchDebounced } from '@vueuse/core'
-import { ArrowLeftRight, Plus, Search, Filter } from 'lucide-vue-next'
+import { ArrowLeftRight, Plus, Search, Filter } from '@lucide/vue'
 import {
   Dialog,
   DialogContent,

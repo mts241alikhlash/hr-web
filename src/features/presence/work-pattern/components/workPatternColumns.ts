@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@mts241alikhlash/ui/dropdown-menu'
-import { Pencil, Settings2, Trash2 } from 'lucide-vue-next'
+import { Pencil, Settings2, Trash2 } from '@lucide/vue'
 import type { WorkPattern } from '../types'
 
 export function createWorkPatternColumns(

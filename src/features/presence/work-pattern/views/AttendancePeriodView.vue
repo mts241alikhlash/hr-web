@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@mts241alikhlash/ui/select'
-import { AlertTriangle } from 'lucide-vue-next'
+import { AlertTriangle } from '@lucide/vue'
 import { computed, onMounted, ref, watch } from 'vue'
 import { createAttendancePeriodColumns } from '../components/attendancePeriodColumns'
 import {

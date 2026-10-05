@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@mts241alikhlash/ui/dropdown-menu'
-import { Eye, Settings2 } from 'lucide-vue-next'
+import { Eye, Settings2 } from '@lucide/vue'
 import { formatPeriod, formatRupiah } from '../../shared/money'
 import { RUN_KIND_LABEL, RUN_STATUS_LABEL } from '../types'
 import type { PayrollRun } from '../types'

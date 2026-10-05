@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@mts241alikhlash/ui/dropdown-menu'
-import { Settings2, Trash2 } from 'lucide-vue-next'
+import { Settings2, Trash2 } from '@lucide/vue'
 import { DRIVER_LABEL } from '../../component'
 import { formatRupiah } from '../../shared/money'
 import type { SalaryAssignment } from '../types'

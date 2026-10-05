@@ -21,7 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@mts241alikhlash/ui/select'
-import { AlertTriangle, Check, Copy } from 'lucide-vue-next'
+import { AlertTriangle, Check, Copy } from '@lucide/vue'
 import { computed, ref, watch } from 'vue'
 import { toast } from 'vue-sonner'
 import { credentialService } from '../services/credentialService'

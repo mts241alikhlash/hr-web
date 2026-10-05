@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@mts241alikhlash/ui/dropdown-menu'
-import { Ban, Settings2 } from 'lucide-vue-next'
+import { Ban, Settings2 } from '@lucide/vue'
 import type { Credential, CredentialStatus } from '../types'
 
 const STATUS_LABEL: Record<CredentialStatus, string> = {

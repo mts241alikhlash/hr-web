@@ -12,7 +12,7 @@ import {
 } from '@mts241alikhlash/ui/dialog'
 import { Input } from '@mts241alikhlash/ui/input'
 import { Label } from '@mts241alikhlash/ui/label'
-import { AlertTriangle, Check, Copy, Plus } from 'lucide-vue-next'
+import { AlertTriangle, Check, Copy, Plus } from '@lucide/vue'
 import { computed, onMounted, ref } from 'vue'
 import { toast } from 'vue-sonner'
 import { createDeviceColumns } from '../components/deviceColumns'

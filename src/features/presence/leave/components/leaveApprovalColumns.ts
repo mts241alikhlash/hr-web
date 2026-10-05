@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@mts241alikhlash/ui/dropdown-menu'
-import { Check, Settings2, X } from 'lucide-vue-next'
+import { Check, Settings2, X } from '@lucide/vue'
 import { STATUS_LABEL, STATUS_VARIANT } from '../types'
 import type { LeaveRequest } from '../types'
 

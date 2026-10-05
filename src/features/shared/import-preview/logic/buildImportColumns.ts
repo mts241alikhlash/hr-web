@@ -7,7 +7,7 @@ import {
   TooltipTrigger,
 } from '@mts241alikhlash/ui/tooltip'
 import { cn } from '@mts241alikhlash/ui/utils'
-import { AlertTriangle, AlertCircle, CheckCircle2 } from 'lucide-vue-next'
+import { AlertTriangle, AlertCircle, CheckCircle2 } from '@lucide/vue'
 import type { ImportColumnDescriptor, ImportPreviewRow } from '../types'
 import { formatErrorMessage } from './formatErrorMessage'
 import { getFieldErrorDetail } from './getFieldErrorDetail'
