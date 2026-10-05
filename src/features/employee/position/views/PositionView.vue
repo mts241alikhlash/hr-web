@@ -1,9 +1,8 @@
 ﻿<script setup lang="ts">
-import { DataTable } from '@mts241alikhlash/ui'
+import { DataTable, SearchInput } from '@mts241alikhlash/ui'
 import { Button } from '@mts241alikhlash/ui/button'
 import { Card, CardHeader, CardTitle } from '@mts241alikhlash/ui/card'
-import { Input } from '@mts241alikhlash/ui/input'
-import { Plus, Search } from '@lucide/vue'
+import { Plus } from '@lucide/vue'
 import { onMounted, ref } from 'vue'
 import PositionFormDialog from '../components/PositionFormDialog.vue'
 import { usePosition } from '../composables/usePosition'
@@ -86,16 +85,10 @@ onMounted(() => {
           item-label="jabatan"
         >
           <template #header-right>
-            <div class="relative w-full sm:w-[240px]">
-              <Search
-                class="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
-              />
-              <Input
-                v-model="searchQuery"
-                placeholder="Cari jabatan..."
-                class="pl-9 h-8 w-full text-sm"
-              />
-            </div>
+            <SearchInput
+              v-model="searchQuery"
+              label="Cari jabatan"
+            />
           </template>
         </DataTable>
       </div>

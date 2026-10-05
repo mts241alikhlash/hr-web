@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { DataTable } from '@mts241alikhlash/ui'
+import { DataTable, SearchInput } from '@mts241alikhlash/ui'
 import { Button } from '@mts241alikhlash/ui/button'
 import { Card, CardHeader, CardTitle } from '@mts241alikhlash/ui/card'
-import { Input } from '@mts241alikhlash/ui/input'
 import { watchDebounced } from '@vueuse/core'
-import { Plus, Search } from '@lucide/vue'
+import { Plus } from '@lucide/vue'
 import { computed, onMounted, ref, watch } from 'vue'
 import { createCredentialColumns } from '../components/credentialColumns'
 import IssueCredentialDialog from '../components/IssueCredentialDialog.vue'
@@ -72,16 +71,10 @@ onMounted(() => void credentialService.fetchCredentials())
           item-label="kartu presensi"
         >
           <template #header-right>
-            <div class="relative w-full sm:w-64">
-              <Search
-                class="absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
-              />
-              <Input
-                v-model="store.search"
-                placeholder="Cari nama pemegang kartu…"
-                class="h-8 pl-8 text-xs w-full"
-              />
-            </div>
+            <SearchInput
+              v-model="store.search"
+              label="Cari nama pemegang kartu"
+            />
           </template>
         </DataTable>
 
