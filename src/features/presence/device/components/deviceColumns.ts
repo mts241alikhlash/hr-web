@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@mts241alikhlash/ui/dropdown-menu'
-import { KeyRound, Settings2 } from 'lucide-vue-next'
+import { KeyRound, Settings2 } from '@lucide/vue'
 import type { GateDevice } from '../types'
 
 function lastSeenLabel(value?: string | null) {

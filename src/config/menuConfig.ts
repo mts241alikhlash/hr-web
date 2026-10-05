@@ -19,7 +19,7 @@ import {
   BriefcaseBusiness,
   IdCard,
   Wallet,
-} from 'lucide-vue-next'
+} from '@lucide/vue'
 
 export type {
   SubMenuItem,

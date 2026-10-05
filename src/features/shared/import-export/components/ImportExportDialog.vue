@@ -23,7 +23,7 @@ import {
   Loader2,
   UploadCloud,
   XCircle,
-} from 'lucide-vue-next'
+} from '@lucide/vue'
 import { computed, ref, watch } from 'vue'
 import type { ImportExportLabels } from '../types'
 import { formatSize } from '../logic/formatSize'

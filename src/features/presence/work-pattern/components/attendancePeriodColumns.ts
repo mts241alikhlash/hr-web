@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@mts241alikhlash/ui/dropdown-menu'
-import { Lock, Settings2 } from 'lucide-vue-next'
+import { Lock, Settings2 } from '@lucide/vue'
 
 import type { AttendancePeriodRow } from '../types'
 

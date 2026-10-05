@@ -12,7 +12,7 @@ import {
 } from '@mts241alikhlash/ui/alert-dialog'
 import { Button, buttonVariants } from '@mts241alikhlash/ui/button'
 import { Card, CardHeader, CardTitle } from '@mts241alikhlash/ui/card'
-import { Plus } from 'lucide-vue-next'
+import { Plus } from '@lucide/vue'
 import { computed, onMounted, ref } from 'vue'
 import SalaryComponentFormDialog from '../components/SalaryComponentFormDialog.vue'
 import { createSalaryComponentColumns } from '../components/salaryComponentColumns'

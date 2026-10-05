@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from '@mts241alikhlash/ui/select'
 import { Skeleton } from '@mts241alikhlash/ui/skeleton'
-import { CalendarDays } from 'lucide-vue-next'
+import { CalendarDays } from '@lucide/vue'
 import { computed, onMounted, ref, watch } from 'vue'
 import { MONTH_NAMES } from '../../shared/money'
 import PayslipCard from '../components/PayslipCard.vue'

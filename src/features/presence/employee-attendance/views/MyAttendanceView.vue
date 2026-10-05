@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { DataTable } from '@mts241alikhlash/ui'
 import { Card, CardHeader, CardTitle } from '@mts241alikhlash/ui/card'
-import { CheckCircle2, Clock, Timer, XCircle } from 'lucide-vue-next'
+import { CheckCircle2, Clock, Timer, XCircle } from '@lucide/vue'
 import { computed, onMounted } from 'vue'
 import { myAttendanceColumns } from '../components/myAttendanceColumns'
 import { employeeAttendanceService } from '../services/employeeAttendanceService'

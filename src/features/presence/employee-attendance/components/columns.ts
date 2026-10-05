@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@mts241alikhlash/ui/dropdown-menu'
-import { Pencil, Settings2 } from 'lucide-vue-next'
+import { Pencil, Settings2 } from '@lucide/vue'
 import CorrectionTrailPopover from './CorrectionTrailPopover.vue'
 import { DAY_STATUS_LABEL, hasLeaveConflict, isAnomalousDay } from '../types'
 import type { DailyPresence, PresenceDayStatus } from '../types'

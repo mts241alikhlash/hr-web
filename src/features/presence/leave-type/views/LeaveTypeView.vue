@@ -2,7 +2,7 @@
 import { DataTable } from '@mts241alikhlash/ui'
 import { Button } from '@mts241alikhlash/ui/button'
 import { Card, CardHeader, CardTitle } from '@mts241alikhlash/ui/card'
-import { Plus } from 'lucide-vue-next'
+import { Plus } from '@lucide/vue'
 import { computed, onMounted, ref } from 'vue'
 import LeaveTypeFormDialog from '../components/LeaveTypeFormDialog.vue'
 import { createLeaveTypeColumns } from '../components/leaveTypeColumns'

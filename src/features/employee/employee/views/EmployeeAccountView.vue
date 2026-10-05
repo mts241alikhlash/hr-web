@@ -22,7 +22,7 @@ import {
 } from '@mts241alikhlash/ui/dialog'
 import { getIndonesianErrorMessage } from '@mts241alikhlash/web-shared/utils/error-handler'
 import { watchDebounced } from '@vueuse/core'
-import { Search, Filter } from 'lucide-vue-next'
+import { Search, Filter } from '@lucide/vue'
 import { onMounted, ref, computed } from 'vue'
 import { toast } from 'vue-sonner'
 import { useRoleGuard } from '@/features/platform/auth'

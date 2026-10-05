@@ -23,7 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@mts241alikhlash/ui/select'
-import { Loader2 } from 'lucide-vue-next'
+import { Loader2 } from '@lucide/vue'
 import { usePosition } from '../composables/usePosition'
 import type { Position, PositionCategoryOption } from '../types'
 import {

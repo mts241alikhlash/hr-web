@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@mts241alikhlash/ui/select'
-import { CalendarDays, Download, Lock, Unlock } from 'lucide-vue-next'
+import { CalendarDays, Download, Lock, Unlock } from '@lucide/vue'
 import { computed, onMounted, watch } from 'vue'
 import { recapColumns } from '../components/recapColumns'
 import { employeeAttendanceService } from '../services/employeeAttendanceService'

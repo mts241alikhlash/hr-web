@@ -2,7 +2,7 @@
 import { Card, CardHeader, CardTitle } from '@mts241alikhlash/ui/card'
 import { DataTable, DatePicker } from '@mts241alikhlash/ui'
 import { Button } from '@mts241alikhlash/ui/button'
-import { AlertTriangle, Plus } from 'lucide-vue-next'
+import { AlertTriangle, Plus } from '@lucide/vue'
 import { onMounted, ref, watch } from 'vue'
 import CorrectionDialog from '../components/CorrectionDialog.vue'
 import ManualEntryDialog from '../components/ManualEntryDialog.vue'

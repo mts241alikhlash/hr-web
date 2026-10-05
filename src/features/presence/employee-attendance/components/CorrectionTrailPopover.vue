@@ -5,7 +5,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@mts241alikhlash/ui/popover'
-import { History } from 'lucide-vue-next'
+import { History } from '@lucide/vue'
 import { ref } from 'vue'
 import { employeeAttendanceService } from '../services/employeeAttendanceService'
 import { useEmployeeAttendanceStore } from '../stores/employeeAttendanceStore'

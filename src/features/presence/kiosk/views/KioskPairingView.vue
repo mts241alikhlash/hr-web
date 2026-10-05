@@ -2,7 +2,7 @@
 import { Button } from '@mts241alikhlash/ui/button'
 import { Input } from '@mts241alikhlash/ui/input'
 import { Label } from '@mts241alikhlash/ui/label'
-import { ScanLine } from 'lucide-vue-next'
+import { ScanLine } from '@lucide/vue'
 import { ref } from 'vue'
 import { kioskService } from '../services/kioskService'
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CloudOff, Loader2, ScanLine } from 'lucide-vue-next'
+import { CloudOff, Loader2, ScanLine } from '@lucide/vue'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useScanQueue } from '../composables/useScanQueue'
 import { useServerClock } from '../composables/useServerClock'
