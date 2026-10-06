@@ -115,7 +115,7 @@ onMounted(() => void employeeAttendanceService.fetchRecap())
             class="flex flex-wrap items-center gap-2.5 md:ml-auto"
           >
             <div
-              class="inline-flex items-center gap-1.5 rounded-lg border bg-muted/40 px-3 py-1.5 text-xs font-medium text-muted-foreground"
+              class="inline-flex items-center gap-1.5 rounded-md border bg-muted/40 px-3 py-1.5 text-xs font-medium text-muted-foreground"
             >
               <CalendarDays class="h-3.5 w-3.5 text-foreground/70" />
               <span>
@@ -128,7 +128,7 @@ onMounted(() => void employeeAttendanceService.fetchRecap())
 
             <Badge
               variant="outline"
-              class="inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-medium shadow-none"
+              class="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium shadow-none"
               :class="
                 store.recap.period.status === 'CLOSED'
                   ? 'border-amber-300/80 bg-amber-50 text-amber-700 dark:border-amber-800 dark:bg-amber-950/50 dark:text-amber-300'

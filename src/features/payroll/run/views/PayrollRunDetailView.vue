@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useBreadcrumbs } from '@mts241alikhlash/web-shared/composables/useBreadcrumbs'
+import { BackButton } from '@mts241alikhlash/ui'
 import { Badge } from '@mts241alikhlash/ui/badge'
 import {
   Table,
@@ -30,6 +32,15 @@ function openPayslip(id: string) {
 }
 
 onMounted(() => void payrollRunService.fetchDetail(runId))
+
+useBreadcrumbs(() => {
+  const name = currentRun.value
+    ? formatPeriod(currentRun.value.year, currentRun.value.month)
+    : null
+  if (!name) return null
+  const trail = route.meta.breadcrumbs ?? []
+  return [...trail.slice(0, -1), { title: name }]
+})
 </script>
 
 <template>
@@ -45,6 +56,10 @@ onMounted(() => void payrollRunService.fetchDetail(runId))
       <div class="flex flex-wrap items-start justify-between gap-4">
         <div>
           <div class="flex items-center gap-2">
+            <BackButton
+              label="Kembali ke daftar perhitungan"
+              @click="router.push('/payroll/runs')"
+            />
             <h1 class="text-lg font-semibold">
               {{ formatPeriod(currentRun.year, currentRun.month) }}
             </h1>

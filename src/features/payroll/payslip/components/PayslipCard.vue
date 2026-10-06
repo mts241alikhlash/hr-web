@@ -18,14 +18,17 @@ defineProps<{ payslip: Payslip }>()
 <template>
   <div class="space-y-6">
     <div class="flex flex-wrap items-start justify-between gap-4">
-      <div>
-        <h1 class="text-lg font-semibold">
-          Slip Gaji {{ formatPeriod(payslip.run.year, payslip.run.month) }}
-        </h1>
-        <p class="text-muted-foreground text-sm">
-          {{ payslip.employee.displayName ?? '-' }} ·
-          {{ payslip.employee.identifier }}
-        </p>
+      <div class="flex items-start gap-3">
+        <slot name="leading" />
+        <div>
+          <h1 class="text-lg font-semibold">
+            Slip Gaji {{ formatPeriod(payslip.run.year, payslip.run.month) }}
+          </h1>
+          <p class="text-muted-foreground text-sm">
+            {{ payslip.employee.displayName ?? '-' }} ·
+            {{ payslip.employee.identifier }}
+          </p>
+        </div>
       </div>
       <Badge
         :variant="payslip.run.status === 'APPROVED' ? 'default' : 'secondary'"
