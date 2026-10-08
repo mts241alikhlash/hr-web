@@ -37,12 +37,16 @@ export function useScanQueue() {
     return open().then(
       (database) =>
         new Promise<T>((resolve, reject) => {
-          const request = run(
-            database.transaction(STORE, mode).objectStore(STORE),
-          )
-          request.onsuccess = () => resolve(request.result)
-          request.onerror = () =>
-            reject(new Error('Antrean lokal gagal diakses'))
+          const transaction = database.transaction(STORE, mode)
+          const request = run(transaction.objectStore(STORE))
+          const fail = () => reject(new Error('Antrean lokal gagal diakses'))
+          request.onsuccess = () => {
+            if (mode === 'readonly') resolve(request.result)
+          }
+          request.onerror = fail
+          transaction.oncomplete = () => resolve(request.result)
+          transaction.onabort = fail
+          transaction.onerror = fail
         }),
     )
   }

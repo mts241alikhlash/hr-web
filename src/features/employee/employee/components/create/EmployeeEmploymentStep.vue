@@ -9,10 +9,8 @@ import {
 } from '@mts241alikhlash/ui/select'
 import {
   FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+  FloatingField,
+  FloatingLabelField,
 } from '@mts241alikhlash/ui/form'
 import type { EmploymentTypeOption, PositionListItem } from '../../types'
 import { positionCategoryLabel } from '../../utils'
@@ -30,46 +28,41 @@ const emit = defineEmits<(e: 'update:kategori', value: string) => void>()
 
 <template>
   <div class="grid gap-5 md:grid-cols-2 items-start">
-    <FormField
+    <FloatingField
       v-slot="{ componentField }"
       name="nip"
+      label="NIP"
     >
-      <FormItem>
-        <FormLabel>NIP</FormLabel>
+      <div>
         <FormControl>
           <Input
-            placeholder="Masukkan NIP (opsional)"
             maxlength="20"
             v-bind="componentField"
           />
         </FormControl>
-        <FormMessage />
-      </FormItem>
-    </FormField>
-    <FormField
+      </div>
+    </FloatingField>
+    <FloatingField
       v-slot="{ componentField }"
       name="nuptk"
+      label="NUPTK"
     >
-      <FormItem>
-        <FormLabel>NUPTK</FormLabel>
+      <div>
         <FormControl>
           <Input
-            placeholder="Punya NUPTK? (opsional)"
             maxlength="20"
             v-bind="componentField"
           />
         </FormControl>
-        <FormMessage />
-      </FormItem>
-    </FormField>
-    <FormField
+      </div>
+    </FloatingField>
+    <FloatingField
       v-slot="{ value, handleChange }"
       name="employmentTypeId"
+      label="Status Kepegawaian"
+      required
     >
-      <FormItem>
-        <FormLabel
-          >Status Kepegawaian <span class="text-destructive">*</span></FormLabel
-        >
+      <div>
         <Select
           :model-value="value"
           @update:model-value="handleChange"
@@ -89,14 +82,13 @@ const emit = defineEmits<(e: 'update:kategori', value: string) => void>()
             </SelectItem>
           </SelectContent>
         </Select>
-        <FormMessage />
-      </FormItem>
-    </FormField>
-    <div class="space-y-2">
-      <label class="text-sm font-medium">
-        Kategori
-        <span class="text-xs font-normal text-muted-foreground">(filter)</span>
-      </label>
+      </div>
+    </FloatingField>
+    <FloatingLabelField
+      label="Kategori (filter)"
+      floating
+      for="employee-create-category-filter"
+    >
       <Select
         :model-value="kategori"
         @update:model-value="
@@ -106,7 +98,10 @@ const emit = defineEmits<(e: 'update:kategori', value: string) => void>()
           }
         "
       >
-        <SelectTrigger class="w-full">
+        <SelectTrigger
+          id="employee-create-category-filter"
+          class="w-full"
+        >
           <SelectValue placeholder="Semua kategori" />
         </SelectTrigger>
         <SelectContent>
@@ -119,18 +114,13 @@ const emit = defineEmits<(e: 'update:kategori', value: string) => void>()
           </SelectItem>
         </SelectContent>
       </Select>
-    </div>
-    <FormField
+    </FloatingLabelField>
+    <FloatingField
       v-slot="{ value, handleChange }"
       name="positionId"
+      label="Jabatan Utama"
     >
-      <FormItem class="md:col-span-2">
-        <FormLabel>
-          Jabatan Utama
-          <span class="text-xs font-normal text-muted-foreground"
-            >(opsional)</span
-          >
-        </FormLabel>
+      <div class="md:col-span-2">
         <Select
           :model-value="value"
           @update:model-value="handleChange"
@@ -150,7 +140,7 @@ const emit = defineEmits<(e: 'update:kategori', value: string) => void>()
             </SelectItem>
           </SelectContent>
         </Select>
-      </FormItem>
-    </FormField>
+      </div>
+    </FloatingField>
   </div>
 </template>

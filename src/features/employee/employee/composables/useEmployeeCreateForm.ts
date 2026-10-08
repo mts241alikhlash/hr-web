@@ -14,6 +14,7 @@ import { PAGINATION } from '@mts241alikhlash/web-shared/constants/pagination'
 import api from '@mts241alikhlash/web-shared/utils/api'
 import { employeeApi } from '../api/employeeApi'
 import { employeeService } from '../services/employeeService'
+import { buildEmployeeCreatePayload } from '../utils'
 import { usePositionCategoryFilter } from './usePositionCategoryFilter'
 import { useReferenceList } from '@/features/platform/reference-data'
 import type {
@@ -154,21 +155,7 @@ export function useEmployeeCreateForm() {
     submitting.value = true
     try {
       const result = await employeeService.createEmployeeWithRelations({
-        core: {
-          name: values.name ?? '',
-          nik: values.nik ?? '',
-          gender: (values.gender ?? 'MALE') as 'MALE' | 'FEMALE',
-          birthPlace: values.birthPlace ?? '',
-          birthDate: values.birthDate ?? '',
-          employmentTypeId: values.employmentTypeId ?? '',
-          positionId: values.positionId ?? undefined,
-          identifier: values.nip ?? values.nik ?? '',
-          password: values.nip ?? values.nik ?? '',
-          email: values.email,
-          phone: values.phone,
-          nip: values.nip,
-          nuptk: values.nuptk,
-        },
+        core: buildEmployeeCreatePayload(values),
         address: hasAddress.value ? { ...address.value } : null,
         positions: extraPositions.value,
       })

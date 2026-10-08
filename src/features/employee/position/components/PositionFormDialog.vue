@@ -26,13 +26,7 @@ import {
 import { Loader2 } from '@lucide/vue'
 import { usePosition } from '../composables/usePosition'
 import type { Position, PositionCategoryOption } from '../types'
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@mts241alikhlash/ui/form'
+import { FormControl, FloatingField } from '@mts241alikhlash/ui/form'
 import { notifyIfOutage } from '@mts241alikhlash/web-shared/utils/notify-outage'
 
 const props = defineProps<{
@@ -131,34 +125,29 @@ const onSubmit = handleSubmit(async (values) => {
           class="space-y-4 px-6 py-4"
           @submit.prevent="onSubmit"
         >
-          <FormField
+          <FloatingField
             v-slot="{ componentField }"
             name="name"
+            label="Nama Jabatan"
+            required
           >
-            <FormItem>
-              <FormLabel
-                >Nama Jabatan <span class="text-destructive">*</span></FormLabel
-              >
+            <div>
               <FormControl>
                 <Input
-                  placeholder="Misal: Kepala Sekolah"
                   :disabled="isSaving"
                   v-bind="componentField"
                 />
               </FormControl>
-              <FormMessage />
-            </FormItem>
-          </FormField>
+            </div>
+          </FloatingField>
 
-          <FormField
+          <FloatingField
             v-slot="{ value, handleChange }"
             name="categoryId"
+            label="Kategori Jabatan"
+            required
           >
-            <FormItem>
-              <FormLabel
-                >Kategori Jabatan
-                <span class="text-destructive">*</span></FormLabel
-              >
+            <div>
               <Select
                 :model-value="value"
                 :disabled="isSaving"
@@ -179,16 +168,15 @@ const onSubmit = handleSubmit(async (values) => {
                   </SelectItem>
                 </SelectContent>
               </Select>
-              <FormMessage />
-            </FormItem>
-          </FormField>
+            </div>
+          </FloatingField>
 
-          <FormField
+          <FloatingField
             v-slot="{ value, handleChange }"
             name="isActive"
+            label="Status"
           >
-            <FormItem>
-              <FormLabel>Status</FormLabel>
+            <div>
               <Select
                 :model-value="String(value)"
                 :disabled="isSaving"
@@ -204,8 +192,8 @@ const onSubmit = handleSubmit(async (values) => {
                   <SelectItem value="false"> Tidak Aktif </SelectItem>
                 </SelectContent>
               </Select>
-            </FormItem>
-          </FormField>
+            </div>
+          </FloatingField>
         </form>
       </ScrollArea>
 

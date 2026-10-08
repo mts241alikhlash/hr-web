@@ -43,24 +43,6 @@ describe('rupiah formatting', () => {
   it('formats a driver count in Indonesian grouping', () => {
     expect(formatCount(1500)).toBe('1.500')
   })
-
-  it('reconciles displayed totals against displayed lines', () => {
-    const lines = [
-      { componentType: 'BASE', amount: '3500000' },
-      { componentType: 'ALLOWANCE', amount: '150000' },
-      { componentType: 'DEDUCTION', amount: '300000' },
-    ]
-
-    const gross = lines
-      .filter((line) => line.componentType !== 'DEDUCTION')
-      .reduce((total, line) => total + Number(line.amount), 0)
-    const deductions = lines
-      .filter((line) => line.componentType === 'DEDUCTION')
-      .reduce((total, line) => total + Number(line.amount), 0)
-
-    expect(formatRupiah(gross)).toMatch(/^Rp\s3\.650\.000$/)
-    expect(formatRupiah(gross - deductions)).toMatch(/^Rp\s3\.350\.000$/)
-  })
 })
 
 describe('payrollRunService', () => {

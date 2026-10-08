@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@mts241alikhlash/ui/select'
+import { FloatingLabelField } from '@mts241alikhlash/ui/form'
 import {
   Dialog,
   DialogContent,
@@ -245,15 +246,19 @@ onMounted(() => {
       </DialogHeader>
 
       <div class="p-6 space-y-4">
-        <div class="space-y-1.5">
-          <label class="text-xs font-semibold text-muted-foreground"
-            >Kategori</label
-          >
+        <FloatingLabelField
+          label="Kategori"
+          for="employee-account-filter-category"
+          floating
+        >
           <Select
             :model-value="filters.categoryFilter"
             @update:model-value="handleFilterChange('categoryFilter', $event)"
           >
-            <SelectTrigger class="w-full">
+            <SelectTrigger
+              id="employee-account-filter-category"
+              class="w-full"
+            >
               <SelectValue placeholder="Semua Kategori" />
             </SelectTrigger>
             <SelectContent>
@@ -267,17 +272,21 @@ onMounted(() => {
               </SelectItem>
             </SelectContent>
           </Select>
-        </div>
+        </FloatingLabelField>
 
-        <div class="space-y-1.5">
-          <label class="text-xs font-semibold text-muted-foreground"
-            >Jabatan</label
-          >
+        <FloatingLabelField
+          label="Jabatan"
+          for="employee-account-filter-position"
+          floating
+        >
           <Select
             :model-value="filters.positionFilter"
             @update:model-value="handleFilterChange('positionFilter', $event)"
           >
-            <SelectTrigger class="w-full">
+            <SelectTrigger
+              id="employee-account-filter-position"
+              class="w-full"
+            >
               <SelectValue placeholder="Semua Jabatan" />
             </SelectTrigger>
             <SelectContent>
@@ -291,17 +300,21 @@ onMounted(() => {
               </SelectItem>
             </SelectContent>
           </Select>
-        </div>
+        </FloatingLabelField>
 
-        <div class="space-y-1.5">
-          <label class="text-xs font-semibold text-muted-foreground"
-            >Status</label
-          >
+        <FloatingLabelField
+          label="Status"
+          for="employee-account-filter-status"
+          floating
+        >
           <Select
             :model-value="filters.statusFilter"
             @update:model-value="handleFilterChange('statusFilter', $event)"
           >
-            <SelectTrigger class="w-full">
+            <SelectTrigger
+              id="employee-account-filter-status"
+              class="w-full"
+            >
               <SelectValue placeholder="Status" />
             </SelectTrigger>
             <SelectContent>
@@ -310,7 +323,7 @@ onMounted(() => {
               <SelectItem value="inactive"> Nonaktif </SelectItem>
             </SelectContent>
           </Select>
-        </div>
+        </FloatingLabelField>
       </div>
 
       <DialogFooter

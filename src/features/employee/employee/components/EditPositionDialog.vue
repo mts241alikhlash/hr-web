@@ -27,13 +27,7 @@ import type {
   PositionEditData,
   PositionListItem,
 } from '../types'
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@mts241alikhlash/ui/form'
+import { FormControl, FloatingField } from '@mts241alikhlash/ui/form'
 
 const props = defineProps<{
   open: boolean
@@ -164,14 +158,13 @@ function categoryLabel(cat?: string) {
         @submit.prevent="onSubmit"
       >
         <div class="grid gap-5 p-1">
-          <FormField
+          <FloatingField
             v-slot="{ value, handleChange }"
             name="positionId"
+            label="Jabatan"
+            required
           >
-            <FormItem class="content-start">
-              <FormLabel>
-                Jabatan <span class="text-destructive">*</span>
-              </FormLabel>
+            <div class="content-start">
               <Select
                 :model-value="value"
                 :disabled="!!editData"
@@ -193,7 +186,6 @@ function categoryLabel(cat?: string) {
                   </SelectItem>
                 </SelectContent>
               </Select>
-              <FormMessage />
               <p
                 v-if="editData"
                 class="text-xs text-muted-foreground mt-1"
@@ -201,17 +193,17 @@ function categoryLabel(cat?: string) {
                 Jabatan tidak dapat diubah setelah dibuat. Silakan hapus dan
                 buat ulang jika salah pilih.
               </p>
-            </FormItem>
-          </FormField>
+            </div>
+          </FloatingField>
 
-          <FormField
+          <FloatingField
             v-slot="{ value, handleChange }"
             name="hireDate"
+            label="Mulai Menjabat"
+            required
+            always-float
           >
-            <FormItem class="content-start">
-              <FormLabel>
-                Mulai Menjabat <span class="text-destructive">*</span>
-              </FormLabel>
+            <div class="content-start">
               <FormControl>
                 <DatePicker
                   :model-value="value"
@@ -219,18 +211,16 @@ function categoryLabel(cat?: string) {
                   @update:model-value="handleChange"
                 />
               </FormControl>
-              <FormMessage />
-            </FormItem>
-          </FormField>
+            </div>
+          </FloatingField>
 
-          <FormField
+          <FloatingField
             v-slot="{ value, handleChange }"
             name="isPrimary"
+            label="Tipe Jabatan"
+            required
           >
-            <FormItem class="content-start">
-              <FormLabel>
-                Tipe Jabatan <span class="text-destructive">*</span>
-              </FormLabel>
+            <div class="content-start">
               <Select
                 :model-value="value"
                 @update:model-value="handleChange"
@@ -249,8 +239,8 @@ function categoryLabel(cat?: string) {
                 Jika dipilih "Jabatan Utama", jabatan utama sebelumnya akan
                 otomatis menjadi tambahan.
               </p>
-            </FormItem>
-          </FormField>
+            </div>
+          </FloatingField>
         </div>
       </form>
 

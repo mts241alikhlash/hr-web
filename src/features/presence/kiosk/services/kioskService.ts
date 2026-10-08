@@ -19,6 +19,7 @@ export interface ClockPort {
     maxOfflineWindowHours: number
   }) => void
   deriveOccurredAt: () => string | null
+  isAnchorStale: () => boolean
 }
 
 export const MAX_FLUSH_BATCH_SIZE = 500
@@ -81,12 +82,45 @@ export const kioskService = {
     try {
       const res = await kioskApi.scan(scan)
       return { result: res.data.data, queued: false }
-    } catch {
-      await queue.enqueue({
-        ...scan,
-        occurredAt: clock.deriveOccurredAt(),
-        clockAnchorId: clock.anchorId.value,
-      })
+    } catch (error) {
+      const status = (error as { response?: { status?: number } } | null)
+        ?.response?.status
+      const occurredAt = clock.deriveOccurredAt()
+      if (
+        status != null ||
+        !clock.anchorId.value ||
+        clock.isAnchorStale() ||
+        !occurredAt
+      ) {
+        return {
+          result: {
+            ...QUEUED,
+            outcome: status != null ? 'REJECTED_ERROR' : 'REJECTED_OFFLINE',
+            rejectionReason:
+              status != null
+                ? 'Scan gagal diproses. Periksa kartu atau perangkat.'
+                : 'Jam perangkat perlu disinkronkan sebelum scan offline.',
+          },
+          queued: false,
+        }
+      }
+      try {
+        await queue.enqueue({
+          ...scan,
+          occurredAt,
+          clockAnchorId: clock.anchorId.value,
+        })
+      } catch {
+        return {
+          result: {
+            ...QUEUED,
+            outcome: 'REJECTED_ERROR',
+            rejectionReason:
+              'Scan tidak tersimpan. Periksa penyimpanan perangkat.',
+          },
+          queued: false,
+        }
+      }
       return {
         result: { ...QUEUED, recordedAt: new Date().toISOString() },
         queued: true,

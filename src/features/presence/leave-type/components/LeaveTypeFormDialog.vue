@@ -13,8 +13,7 @@ import {
   FormDescription,
   FormField,
   FormItem,
-  FormLabel,
-  FormMessage,
+  FloatingField,
 } from '@mts241alikhlash/ui/form'
 import { Input } from '@mts241alikhlash/ui/input'
 import {
@@ -155,49 +154,45 @@ const onSubmit = handleSubmit(async (form) => {
         @submit="onSubmit"
       >
         <div class="px-6 py-5 space-y-4 max-h-[70vh] overflow-y-auto">
-          <FormField
+          <FloatingField
             v-slot="{ componentField }"
             name="code"
+            label="Kode"
+            required
           >
-            <FormItem>
-              <FormLabel>Kode</FormLabel>
+            <div>
               <FormControl>
                 <Input
                   v-bind="componentField"
                   :disabled="isEdit"
-                  placeholder="CUTI_MELAHIRKAN"
                 />
               </FormControl>
               <FormDescription v-if="isEdit">
                 Kode tidak dapat diubah setelah dibuat.
               </FormDescription>
-              <FormMessage />
-            </FormItem>
-          </FormField>
+            </div>
+          </FloatingField>
 
-          <FormField
+          <FloatingField
             v-slot="{ componentField }"
             name="name"
+            label="Nama"
+            required
           >
-            <FormItem>
-              <FormLabel>Nama</FormLabel>
+            <div>
               <FormControl>
-                <Input
-                  v-bind="componentField"
-                  placeholder="Cuti Melahirkan"
-                />
+                <Input v-bind="componentField" />
               </FormControl>
-              <FormMessage />
-            </FormItem>
-          </FormField>
+            </div>
+          </FloatingField>
 
           <div class="grid grid-cols-2 gap-3">
-            <FormField
+            <FloatingField
               v-slot="{ componentField }"
               name="treatment"
+              label="Perlakuan"
             >
-              <FormItem>
-                <FormLabel>Perlakuan</FormLabel>
+              <div>
                 <Select v-bind="componentField">
                   <FormControl>
                     <SelectTrigger class="w-full"
@@ -209,16 +204,15 @@ const onSubmit = handleSubmit(async (form) => {
                     <SelectItem value="OFFICIAL_DUTY">Dinas Luar</SelectItem>
                   </SelectContent>
                 </Select>
-                <FormMessage />
-              </FormItem>
-            </FormField>
+              </div>
+            </FloatingField>
 
-            <FormField
+            <FloatingField
               v-slot="{ componentField }"
               name="appliesTo"
+              label="Berlaku untuk"
             >
-              <FormItem>
-                <FormLabel>Berlaku untuk</FormLabel>
+              <div>
                 <Select v-bind="componentField">
                   <FormControl>
                     <SelectTrigger class="w-full"
@@ -230,9 +224,8 @@ const onSubmit = handleSubmit(async (form) => {
                     <SelectItem value="STUDENT">Siswa</SelectItem>
                   </SelectContent>
                 </Select>
-                <FormMessage />
-              </FormItem>
-            </FormField>
+              </div>
+            </FloatingField>
           </div>
 
           <FormField
@@ -253,13 +246,14 @@ const onSubmit = handleSubmit(async (form) => {
             </FormItem>
           </FormField>
 
-          <FormField
+          <FloatingField
             v-if="values.consumesQuota"
             v-slot="{ componentField }"
             name="annualQuota"
+            label="Kuota tahunan (hari kerja)"
+            required
           >
-            <FormItem>
-              <FormLabel>Kuota tahunan (hari kerja)</FormLabel>
+            <div>
               <FormControl>
                 <Input
                   v-bind="componentField"
@@ -268,9 +262,8 @@ const onSubmit = handleSubmit(async (form) => {
                   max="365"
                 />
               </FormControl>
-              <FormMessage />
-            </FormItem>
-          </FormField>
+            </div>
+          </FloatingField>
 
           <FormField
             v-slot="{ value, handleChange }"

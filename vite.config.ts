@@ -8,7 +8,10 @@ import {
   UNROUTED_PREFIXES,
 } from './api-routes.config.ts'
 
-const referenceDataRoot = path.resolve(import.meta.dirname, './packages/reference-data/src')
+const referenceDataRoot = path.resolve(
+  import.meta.dirname,
+  './packages/reference-data/src',
+)
 const platformRoot = path.resolve(
   import.meta.dirname,
   './packages/platform/src/features',
@@ -66,6 +69,9 @@ const unroutedProxy: ProxyTable = Object.fromEntries(
 )
 
 export default defineConfig(({ mode }) => ({
+  optimizeDeps: {
+    include: ['@unovis/ts > striptags'],
+  },
   server: {
     port: 5177,
     proxy: { ...serviceProxy, ...healthProxy, ...unroutedProxy },

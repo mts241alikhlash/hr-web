@@ -5,6 +5,8 @@ export type ScanOutcome =
   | 'REJECTED_REVOKED'
   | 'REJECTED_INACTIVE'
   | 'REJECTED_STALE'
+  | 'REJECTED_OFFLINE'
+  | 'REJECTED_ERROR'
 
 export type ScanDirection = 'CHECK_IN' | 'CHECK_OUT' | 'NONE'
 
