@@ -1,8 +1,29 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { Input } from '@mts241alikhlash/ui/input'
+import {
+  RegionSelect,
+  type RegionCodes,
+  type RegionNames,
+} from '@/features/platform/address'
 import type { AddressFormState } from '../types'
 
 const address = defineModel<AddressFormState>({ required: true })
+
+const regionCodes = computed<RegionCodes>(() => ({
+  provinceCode: address.value.provinceCode,
+  regencyCode: address.value.regencyCode,
+  districtCode: address.value.districtCode,
+  villageCode: address.value.villageCode,
+}))
+
+function setRegionCodes(codes: RegionCodes) {
+  Object.assign(address.value, codes)
+}
+
+function setRegionNames(names: RegionNames) {
+  Object.assign(address.value, names)
+}
 </script>
 
 <template>
@@ -30,32 +51,11 @@ const address = defineModel<AddressFormState>({ required: true })
         />
       </div>
     </div>
-    <div class="space-y-2">
-      <label class="text-sm font-medium">Desa / Kelurahan</label>
-      <Input
-        v-model="address.village"
-        placeholder="Desa / kelurahan"
-      />
-    </div>
-    <div class="space-y-2">
-      <label class="text-sm font-medium">Kecamatan</label>
-      <Input
-        v-model="address.district"
-        placeholder="Kecamatan"
-      />
-    </div>
-    <div class="space-y-2">
-      <label class="text-sm font-medium">Kota / Kabupaten</label>
-      <Input
-        v-model="address.city"
-        placeholder="Kota / kabupaten"
-      />
-    </div>
-    <div class="space-y-2">
-      <label class="text-sm font-medium">Provinsi</label>
-      <Input
-        v-model="address.province"
-        placeholder="Provinsi"
+    <div class="md:col-span-2">
+      <RegionSelect
+        :model-value="regionCodes"
+        @update:model-value="setRegionCodes"
+        @update:names="setRegionNames"
       />
     </div>
     <div class="space-y-2">
