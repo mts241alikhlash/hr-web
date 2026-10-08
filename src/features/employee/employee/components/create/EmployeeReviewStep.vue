@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { AddressFormState } from '@/features/shared/multi-step-form'
 import type { EmployeePositionInput } from '../../types'
 
-defineProps<{
+const props = defineProps<{
   values: {
     name?: string
     nik?: string
@@ -13,6 +14,18 @@ defineProps<{
   hasAddress: boolean
   extraPositions: EmployeePositionInput[]
 }>()
+
+const addressLine = computed(() =>
+  [
+    props.address.street,
+    props.address.village,
+    props.address.district,
+    props.address.city,
+    props.address.province,
+  ]
+    .filter(Boolean)
+    .join(', '),
+)
 </script>
 
 <template>
@@ -29,7 +42,7 @@ defineProps<{
     <div class="rounded-xl border p-4">
       <p class="font-semibold mb-1">Alamat</p>
       <p class="text-muted-foreground">
-        {{ hasAddress ? address.street : 'Dilewati' }}
+        {{ hasAddress ? addressLine : 'Dilewati' }}
       </p>
     </div>
     <div class="rounded-xl border p-4">

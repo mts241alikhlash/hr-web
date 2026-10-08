@@ -35,13 +35,44 @@ describe('useAddressSubform', () => {
     expect(validateAddress()).toBe(false)
   })
 
-  it('validateAddress passes once all required fields are filled', () => {
+  it('defaults every region code to empty', () => {
+    const { address } = useAddressSubform()
+    expect(address.value.provinceCode).toBe('')
+    expect(address.value.regencyCode).toBe('')
+    expect(address.value.districtCode).toBe('')
+    expect(address.value.villageCode).toBe('')
+  })
+
+  it('validateAddress passes once the four region codes are chosen', () => {
     const { address, validateAddress } = useAddressSubform()
     address.value.street = 'Jl. Merdeka'
-    address.value.village = 'Sukamaju'
-    address.value.district = 'Cikole'
-    address.value.city = 'Bandung'
-    address.value.province = 'Jawa Barat'
+    address.value.provinceCode = '32'
+    address.value.regencyCode = '32.04'
+    address.value.districtCode = '32.04.01'
+    address.value.villageCode = '32.04.01.2001'
     expect(validateAddress()).toBe(true)
   })
+
+  it.each([
+    'provinceCode',
+    'regencyCode',
+    'districtCode',
+    'villageCode',
+  ] as const)(
+    'validateAddress fails without %s even when the names are typed',
+    (missing) => {
+      const { address, validateAddress } = useAddressSubform()
+      address.value.street = 'Jl. Merdeka'
+      address.value.province = 'Jawa Barat'
+      address.value.city = 'Bandung'
+      address.value.district = 'Cikole'
+      address.value.village = 'Sukamaju'
+      address.value.provinceCode = '32'
+      address.value.regencyCode = '32.04'
+      address.value.districtCode = '32.04.01'
+      address.value.villageCode = '32.04.01.2001'
+      address.value[missing] = ''
+      expect(validateAddress()).toBe(false)
+    },
+  )
 })

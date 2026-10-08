@@ -18,4 +18,8 @@ export interface AddressFormState {
   province: string
   postalCode: string
   country: string
+  provinceCode: string
+  regencyCode: string
+  districtCode: string
+  villageCode: string
 }

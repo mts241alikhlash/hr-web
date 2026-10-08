@@ -12,6 +12,10 @@ export function useAddressSubform() {
     province: '',
     postalCode: '',
     country: 'Indonesia',
+    provinceCode: '',
+    regencyCode: '',
+    districtCode: '',
+    villageCode: '',
   })
 
   const hasAddress = computed(() => address.value.street.trim() !== '')
@@ -19,10 +23,10 @@ export function useAddressSubform() {
   function validateAddress(): boolean {
     if (!hasAddress.value) return true
     const required = [
-      address.value.village,
-      address.value.district,
-      address.value.city,
-      address.value.province,
+      address.value.provinceCode,
+      address.value.regencyCode,
+      address.value.districtCode,
+      address.value.villageCode,
       address.value.country,
     ]
     return required.every((v) => v.trim() !== '')
