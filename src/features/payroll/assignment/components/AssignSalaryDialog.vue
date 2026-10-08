@@ -12,10 +12,7 @@ import {
 import {
   FormControl,
   FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+  FloatingField,
 } from '@mts241alikhlash/ui/form'
 import { Input } from '@mts241alikhlash/ui/input'
 import {
@@ -110,14 +107,13 @@ const onSubmit = handleSubmit(async (form) => {
         @submit="onSubmit"
       >
         <div class="px-6 py-5 space-y-4 max-h-[70vh] overflow-y-auto">
-          <FormField
+          <FloatingField
             v-slot="{ componentField }"
             name="componentId"
+            label="Komponen Gaji"
+            required
           >
-            <FormItem>
-              <FormLabel>
-                Komponen Gaji <span class="text-destructive">*</span>
-              </FormLabel>
+            <div>
               <Select v-bind="componentField">
                 <FormControl>
                   <SelectTrigger class="w-full">
@@ -134,42 +130,37 @@ const onSubmit = handleSubmit(async (form) => {
                   </SelectItem>
                 </SelectContent>
               </Select>
-              <FormMessage />
-            </FormItem>
-          </FormField>
+            </div>
+          </FloatingField>
 
-          <FormField
+          <FloatingField
             v-slot="{ componentField }"
             name="value"
+            :label="isDriven ? 'Tarif per Satuan (Rp)' : 'Nominal (Rp)'"
+            required
           >
-            <FormItem>
-              <FormLabel>
-                {{ isDriven ? 'Tarif per Satuan (Rp)' : 'Nominal (Rp)' }}
-                <span class="text-destructive">*</span>
-              </FormLabel>
+            <div>
               <FormControl>
                 <Input
                   v-bind="componentField"
                   inputmode="numeric"
-                  placeholder="3500000"
                 />
               </FormControl>
               <FormDescription v-if="isDriven && selected?.driver">
                 Dikalikan {{ DRIVER_LABEL[selected.driver].toLowerCase() }} pada
                 bulan yang dihitung.
               </FormDescription>
-              <FormMessage />
-            </FormItem>
-          </FormField>
+            </div>
+          </FloatingField>
 
-          <FormField
+          <FloatingField
             v-slot="{ value, handleChange }"
             name="effectiveFrom"
+            label="Berlaku Mulai"
+            required
+            always-float
           >
-            <FormItem>
-              <FormLabel>
-                Berlaku Mulai <span class="text-destructive">*</span>
-              </FormLabel>
+            <div>
               <FormControl>
                 <DatePicker
                   :model-value="value"
@@ -177,9 +168,8 @@ const onSubmit = handleSubmit(async (form) => {
                   @update:model-value="handleChange"
                 />
               </FormControl>
-              <FormMessage />
-            </FormItem>
-          </FormField>
+            </div>
+          </FloatingField>
         </div>
 
         <DialogFooter

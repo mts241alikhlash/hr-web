@@ -10,10 +10,8 @@ import {
 } from '@mts241alikhlash/ui/select'
 import {
   FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+  FloatingField,
+  FloatingLabelField,
 } from '@mts241alikhlash/ui/form'
 import type {
   EmploymentTypeOption,
@@ -42,48 +40,48 @@ function onCategorySelect(value: AcceptableValue) {
 
 <template>
   <div class="grid gap-5 md:grid-cols-2 p-1">
-    <FormField
+    <FloatingField
       v-slot="{ componentField }"
       name="nip"
+      label="NIP"
     >
-      <FormItem class="content-start">
-        <FormLabel>NIP</FormLabel>
+      <div class="content-start">
         <FormControl>
           <Input
-            placeholder="Masukkan NIP (opsional)"
             maxlength="20"
             v-bind="componentField"
           />
         </FormControl>
-        <FormMessage />
-      </FormItem>
-    </FormField>
-    <FormField
+      </div>
+    </FloatingField>
+    <FloatingField
       v-slot="{ componentField }"
       name="nuptk"
+      label="NUPTK"
     >
-      <FormItem class="content-start">
-        <FormLabel>NUPTK</FormLabel>
+      <div class="content-start">
         <FormControl>
           <Input
-            placeholder="Punya NUPTK? (opsional)"
             maxlength="20"
             v-bind="componentField"
           />
         </FormControl>
-        <FormMessage />
-      </FormItem>
-    </FormField>
-    <div class="space-y-2 content-start">
-      <label class="text-sm font-medium leading-none">
-        Kategori
-        <span class="text-xs font-normal text-muted-foreground">(filter)</span>
-      </label>
+      </div>
+    </FloatingField>
+    <FloatingLabelField
+      label="Kategori (filter)"
+      for="employee-category-filter"
+      floating
+      class="content-start"
+    >
       <Select
         :model-value="kategori"
         @update:model-value="onCategorySelect"
       >
-        <SelectTrigger class="w-full">
+        <SelectTrigger
+          id="employee-category-filter"
+          class="w-full"
+        >
           <SelectValue placeholder="Semua kategori" />
         </SelectTrigger>
         <SelectContent>
@@ -96,18 +94,13 @@ function onCategorySelect(value: AcceptableValue) {
           </SelectItem>
         </SelectContent>
       </Select>
-    </div>
-    <FormField
+    </FloatingLabelField>
+    <FloatingField
       v-slot="{ value, handleChange }"
       name="positionId"
+      label="Jabatan Utama"
     >
-      <FormItem class="content-start">
-        <FormLabel>
-          Jabatan Utama
-          <span class="text-xs font-normal text-muted-foreground"
-            >(opsional)</span
-          >
-        </FormLabel>
+      <div class="content-start">
         <Select
           :model-value="value"
           @update:model-value="handleChange"
@@ -127,17 +120,15 @@ function onCategorySelect(value: AcceptableValue) {
             </SelectItem>
           </SelectContent>
         </Select>
-        <FormMessage />
-      </FormItem>
-    </FormField>
-    <FormField
+      </div>
+    </FloatingField>
+    <FloatingField
       v-slot="{ value, handleChange }"
       name="employmentTypeId"
+      label="Status Kepegawaian"
+      required
     >
-      <FormItem class="content-start">
-        <FormLabel
-          >Status Kepegawaian <span class="text-destructive">*</span></FormLabel
-        >
+      <div class="content-start">
         <Select
           :model-value="value"
           @update:model-value="handleChange"
@@ -157,8 +148,7 @@ function onCategorySelect(value: AcceptableValue) {
             </SelectItem>
           </SelectContent>
         </Select>
-        <FormMessage />
-      </FormItem>
-    </FormField>
+      </div>
+    </FloatingField>
   </div>
 </template>

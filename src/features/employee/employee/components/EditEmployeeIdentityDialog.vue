@@ -13,13 +13,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@mts241alikhlash/ui/dialog'
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@mts241alikhlash/ui/form'
+import { FormControl, FloatingField } from '@mts241alikhlash/ui/form'
 import { Input } from '@mts241alikhlash/ui/input'
 import { ScrollArea } from '@mts241alikhlash/ui/scroll-area'
 import {
@@ -137,49 +131,43 @@ const onSubmit = form.handleSubmit(async (values) => {
         <ScrollArea class="flex-1 min-h-0">
           <div class="p-6">
             <div class="grid gap-5 md:grid-cols-2">
-              <FormField
+              <FloatingField
                 v-slot="{ componentField }"
                 name="nip"
+                label="NIP"
               >
-                <FormItem class="content-start">
-                  <FormLabel>NIP</FormLabel>
+                <div class="content-start">
                   <FormControl>
                     <Input
-                      placeholder="Nomor Induk Pegawai"
                       maxlength="50"
                       v-bind="componentField"
                     />
                   </FormControl>
-                  <FormMessage />
-                </FormItem>
-              </FormField>
+                </div>
+              </FloatingField>
 
-              <FormField
+              <FloatingField
                 v-slot="{ componentField }"
                 name="nuptk"
+                label="NUPTK"
               >
-                <FormItem class="content-start">
-                  <FormLabel>NUPTK</FormLabel>
+                <div class="content-start">
                   <FormControl>
                     <Input
-                      placeholder="Nomor Unik Pendidik"
                       maxlength="50"
                       v-bind="componentField"
                     />
                   </FormControl>
-                  <FormMessage />
-                </FormItem>
-              </FormField>
+                </div>
+              </FloatingField>
 
-              <FormField
+              <FloatingField
                 v-slot="{ componentField }"
                 name="employmentTypeId"
+                label="Status Kepegawaian"
+                required
               >
-                <FormItem class="md:col-span-2 content-start">
-                  <FormLabel
-                    >Status Kepegawaian
-                    <span class="text-destructive">*</span></FormLabel
-                  >
+                <div class="md:col-span-2 content-start">
                   <Select v-bind="componentField">
                     <FormControl>
                       <SelectTrigger class="w-full">
@@ -196,9 +184,8 @@ const onSubmit = form.handleSubmit(async (values) => {
                       </SelectItem>
                     </SelectContent>
                   </Select>
-                  <FormMessage />
-                </FormItem>
-              </FormField>
+                </div>
+              </FloatingField>
             </div>
           </div>
         </ScrollArea>

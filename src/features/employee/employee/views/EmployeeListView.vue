@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@mts241alikhlash/ui/select'
+import { FloatingLabelField } from '@mts241alikhlash/ui/form'
 import { useRoleGuard } from '@/features/platform/auth'
 import { getIndonesianErrorMessage } from '@mts241alikhlash/web-shared/utils/error-handler'
 import { watchDebounced } from '@vueuse/core'
@@ -386,17 +387,21 @@ onMounted(() => {
       </DialogHeader>
 
       <div class="p-6 space-y-4">
-        <div class="space-y-1.5">
-          <label class="text-xs font-semibold text-muted-foreground"
-            >Kategori</label
-          >
+        <FloatingLabelField
+          label="Kategori"
+          for="employee-filter-category"
+          floating
+        >
           <Select
             :model-value="filters.positionCategoryId || 'all'"
             @update:model-value="
               handleFilterChange('positionCategoryId', $event)
             "
           >
-            <SelectTrigger class="w-full">
+            <SelectTrigger
+              id="employee-filter-category"
+              class="w-full"
+            >
               <SelectValue placeholder="Semua Kategori" />
             </SelectTrigger>
             <SelectContent>
@@ -410,17 +415,21 @@ onMounted(() => {
               </SelectItem>
             </SelectContent>
           </Select>
-        </div>
+        </FloatingLabelField>
 
-        <div class="space-y-1.5">
-          <label class="text-xs font-semibold text-muted-foreground"
-            >Status</label
-          >
+        <FloatingLabelField
+          label="Status"
+          for="employee-filter-status"
+          floating
+        >
           <Select
             :model-value="filters.statusFilter"
             @update:model-value="handleFilterChange('statusFilter', $event)"
           >
-            <SelectTrigger class="w-full">
+            <SelectTrigger
+              id="employee-filter-status"
+              class="w-full"
+            >
               <SelectValue placeholder="Status" />
             </SelectTrigger>
             <SelectContent>
@@ -429,7 +438,7 @@ onMounted(() => {
               <SelectItem value="inactive"> Nonaktif </SelectItem>
             </SelectContent>
           </Select>
-        </div>
+        </FloatingLabelField>
       </div>
 
       <DialogFooter

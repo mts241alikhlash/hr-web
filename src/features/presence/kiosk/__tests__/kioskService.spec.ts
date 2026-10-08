@@ -34,9 +34,10 @@ function fakeQueue() {
 
 function fakeClock(derived: string | null = '2026-08-10T07:00:00.000Z') {
   return {
-    anchorId: { value: 'anchor-1' },
+    anchorId: { value: 'anchor-1' as string | null },
     setAnchor: vi.fn(),
     deriveOccurredAt: vi.fn(() => derived),
+    isAnchorStale: vi.fn(() => false),
   }
 }
 
@@ -79,13 +80,14 @@ describe('kioskService.submit', () => {
     })
   })
 
-  it('queues without a timestamp when no anchor was ever obtained', async () => {
+  it('does not queue a scan without a trustworthy timestamp', async () => {
     vi.mocked(kioskApi.scan).mockRejectedValue(new Error('offline'))
     const queue = fakeQueue()
 
-    await kioskService.submit('code', fakeClock(null), queue)
+    const response = await kioskService.submit('code', fakeClock(null), queue)
 
-    expect(queue.entries[0]?.occurredAt).toBeNull()
+    expect(response.result.outcome).toBe('REJECTED_OFFLINE')
+    expect(queue.entries).toEqual([])
   })
 
   it('gives every scan a distinct retry key', async () => {
@@ -99,6 +101,68 @@ describe('kioskService.submit', () => {
     expect(queue.entries[0]?.clientEventId).not.toBe(
       queue.entries[1]?.clientEventId,
     )
+  })
+
+  it('does not queue a scan after the clock anchor expires offline', async () => {
+    vi.mocked(kioskApi.scan).mockRejectedValue(new Error('offline'))
+    const queue = fakeQueue()
+    const clock = fakeClock()
+    clock.isAnchorStale.mockReturnValue(true)
+
+    const response = await kioskService.submit('code', clock, queue)
+
+    expect(response.queued).toBe(false)
+    expect(response.result.outcome).toBe('REJECTED_OFFLINE')
+    expect(response.result.rejectionReason).toMatch(/sinkron/i)
+    expect(queue.entries).toEqual([])
+  })
+
+  it('does not queue offline without an anchor', async () => {
+    vi.mocked(kioskApi.scan).mockRejectedValue(new Error('offline'))
+    const queue = fakeQueue()
+    const clock = fakeClock(null)
+    clock.anchorId.value = null
+
+    const response = await kioskService.submit('code', clock, queue)
+
+    expect(response.result.outcome).toBe('REJECTED_OFFLINE')
+    expect(queue.entries).toEqual([])
+  })
+
+  it('does not turn an explicit HTTP failure into an offline success', async () => {
+    vi.mocked(kioskApi.scan).mockRejectedValue({ response: { status: 403 } })
+    const queue = fakeQueue()
+
+    const response = await kioskService.submit('code', fakeClock(), queue)
+
+    expect(response.result.outcome).toBe('REJECTED_ERROR')
+    expect(response.queued).toBe(false)
+    expect(queue.entries).toEqual([])
+  })
+
+  it('shows rejection if the local queue cannot save an offline scan', async () => {
+    vi.mocked(kioskApi.scan).mockRejectedValue(new Error('offline'))
+    const queue = fakeQueue()
+    queue.enqueue.mockRejectedValue(new Error('Antrean lokal gagal diakses'))
+
+    const response = await kioskService.submit('code', fakeClock(), queue)
+
+    expect(response.queued).toBe(false)
+    expect(response.result.outcome).toBe('REJECTED_ERROR')
+    expect(response.result.rejectionReason).toMatch(/tidak tersimpan/i)
+  })
+
+  it('accepts an online response even if the local anchor expired', async () => {
+    vi.mocked(kioskApi.scan).mockResolvedValue({
+      data: { data: { outcome: 'ACCEPTED', direction: 'CHECK_IN' } },
+    } as never)
+    const clock = fakeClock()
+    clock.isAnchorStale.mockReturnValue(true)
+
+    const response = await kioskService.submit('code', clock, fakeQueue())
+
+    expect(response.result.outcome).toBe('ACCEPTED')
+    expect(response.queued).toBe(false)
   })
 })
 
