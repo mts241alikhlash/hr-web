@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { DataTable } from '@mts241alikhlash/ui'
 import { Button } from '@mts241alikhlash/ui/button'
-import { Card, CardHeader, CardTitle } from '@mts241alikhlash/ui/card'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from '@mts241alikhlash/ui/card'
 import {
   Dialog,
   DialogContent,
@@ -76,21 +81,21 @@ onMounted(() => void deviceService.fetch())
 <template>
   <div class="p-4 md:p-6 lg:p-8">
     <Card
+      gap="none"
       class="overflow-hidden rounded-2xl shadow-sm shadow-black/5 ring-1 ring-black/4"
     >
-      <CardHeader
-        class="flex flex-row items-center justify-between border-b px-6 py-5"
-      >
-        <CardTitle class="text-2xl font-bold tracking-tight">
-          Perangkat Gerbang
-        </CardTitle>
+      <CardHeader standard>
+        <CardTitle size="lg"> Perangkat Gerbang </CardTitle>
         <Button @click="showForm = true">
           <Plus class="mr-2 h-4 w-4" />
           Daftarkan Gerbang
         </Button>
       </CardHeader>
 
-      <div class="p-6 space-y-6">
+      <CardContent
+        variant="standard"
+        class="space-y-6"
+      >
         <div
           v-if="lastIssued"
           class="space-y-3 rounded-lg border border-amber-300 bg-amber-50 p-4 text-amber-900 dark:border-amber-900 dark:bg-amber-950 dark:text-amber-200"
@@ -141,7 +146,7 @@ onMounted(() => void deviceService.fetch())
           :is-loading="loading"
           item-label="perangkat gerbang"
         />
-      </div>
+      </CardContent>
     </Card>
   </div>
 

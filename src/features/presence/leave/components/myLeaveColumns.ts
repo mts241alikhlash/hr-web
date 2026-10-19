@@ -2,13 +2,7 @@ import type { ColumnDef } from '@tanstack/vue-table'
 import { h } from 'vue'
 import { Badge } from '@mts241alikhlash/ui/badge'
 import { Button } from '@mts241alikhlash/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@mts241alikhlash/ui/dropdown-menu'
-import { RotateCcw, Settings2 } from '@lucide/vue'
+import { RotateCcw } from '@lucide/vue'
 import { STATUS_LABEL, STATUS_VARIANT } from '../types'
 import type { LeaveRequest } from '../types'
 
@@ -86,49 +80,9 @@ export function createMyLeaveColumns(
         const req = row.original
         if (req.status !== 'PENDING') return '-'
         return h(
-          DropdownMenu,
-          {},
-          {
-            default: () => [
-              h(
-                DropdownMenuTrigger,
-                { asChild: true },
-                {
-                  default: () =>
-                    h(
-                      Button,
-                      { variant: 'ghost', class: 'h-8 w-8 p-0' },
-                      {
-                        default: () => [
-                          h('span', { class: 'sr-only' }, 'Buka opsi'),
-                          h(Settings2, { class: 'h-4 w-4' }),
-                        ],
-                      },
-                    ),
-                },
-              ),
-              h(
-                DropdownMenuContent,
-                { align: 'end' },
-                {
-                  default: () => [
-                    h(
-                      DropdownMenuItem,
-                      { onClick: () => onWithdraw(req.id) },
-                      {
-                        default: () => [
-                          h(RotateCcw, {
-                            class: 'mr-2 h-4 w-4 text-amber-600',
-                          }),
-                          'Tarik Pengajuan',
-                        ],
-                      },
-                    ),
-                  ],
-                },
-              ),
-            ],
-          },
+          Button,
+          { size: 'sm', variant: 'outline', onClick: () => onWithdraw(req.id) },
+          () => [h(RotateCcw, { class: 'size-4 mr-1.5' }), 'Tarik Pengajuan'],
         )
       },
     },

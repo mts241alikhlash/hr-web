@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { DataTable, DatePicker } from '@mts241alikhlash/ui'
 import { Button } from '@mts241alikhlash/ui/button'
-import { Card, CardHeader, CardTitle } from '@mts241alikhlash/ui/card'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from '@mts241alikhlash/ui/card'
 import {
   Dialog,
   DialogContent,
@@ -83,21 +88,21 @@ onMounted(() => {
 <template>
   <div class="p-4 md:p-6 lg:p-8">
     <Card
+      gap="none"
       class="overflow-hidden rounded-2xl shadow-sm shadow-black/5 ring-1 ring-black/4"
     >
-      <CardHeader
-        class="flex flex-row items-center justify-between border-b px-6 py-5"
-      >
-        <CardTitle class="text-2xl font-bold tracking-tight">
-          Izin & Cuti Saya
-        </CardTitle>
+      <CardHeader standard>
+        <CardTitle size="lg"> Izin & Cuti Saya </CardTitle>
         <Button @click="open = true">
           <Plus class="mr-2 h-4 w-4" />
           Ajukan
         </Button>
       </CardHeader>
 
-      <div class="p-6 space-y-6">
+      <CardContent
+        variant="standard"
+        class="space-y-6"
+      >
         <div
           v-if="balances.length > 0"
           class="grid gap-4 sm:grid-cols-3"
@@ -227,7 +232,7 @@ onMounted(() => {
             </DialogFooter>
           </DialogContent>
         </Dialog>
-      </div>
+      </CardContent>
     </Card>
   </div>
 </template>

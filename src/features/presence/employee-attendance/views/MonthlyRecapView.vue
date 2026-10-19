@@ -2,7 +2,12 @@
 import { DataTable } from '@mts241alikhlash/ui'
 import { Badge } from '@mts241alikhlash/ui/badge'
 import { Button } from '@mts241alikhlash/ui/button'
-import { Card, CardHeader, CardTitle } from '@mts241alikhlash/ui/card'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from '@mts241alikhlash/ui/card'
 import {
   Select,
   SelectContent,
@@ -61,14 +66,11 @@ onMounted(() => void employeeAttendanceService.fetchRecap())
 <template>
   <div class="p-4 md:p-6 lg:p-8">
     <Card
+      gap="none"
       class="overflow-hidden rounded-2xl shadow-sm shadow-black/5 ring-1 ring-black/4"
     >
-      <CardHeader
-        class="flex flex-row items-center justify-between border-b px-6 py-5"
-      >
-        <CardTitle class="text-2xl font-bold tracking-tight">
-          Rekap Kehadiran Bulanan
-        </CardTitle>
+      <CardHeader standard>
+        <CardTitle size="lg"> Rekap Kehadiran Bulanan </CardTitle>
         <Button
           variant="outline"
           @click="employeeAttendanceService.exportRecap()"
@@ -78,7 +80,10 @@ onMounted(() => void employeeAttendanceService.fetchRecap())
         </Button>
       </CardHeader>
 
-      <div class="p-6 space-y-6">
+      <CardContent
+        variant="standard"
+        class="space-y-6"
+      >
         <div class="flex flex-wrap items-center gap-3">
           <Select v-model="selectedMonth">
             <SelectTrigger class="w-[125px]">
@@ -156,7 +161,7 @@ onMounted(() => void employeeAttendanceService.fetchRecap())
           :is-loading="store.loading"
           item-label="rekap kehadiran pegawai"
         />
-      </div>
+      </CardContent>
     </Card>
   </div>
 </template>

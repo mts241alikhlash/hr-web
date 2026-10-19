@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { DataTable, SearchInput } from '@mts241alikhlash/ui'
 import { Button } from '@mts241alikhlash/ui/button'
-import { Card, CardHeader, CardTitle } from '@mts241alikhlash/ui/card'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from '@mts241alikhlash/ui/card'
 import { watchDebounced } from '@vueuse/core'
 import { Plus } from '@lucide/vue'
 import { computed, onMounted, ref, watch } from 'vue'
@@ -46,21 +51,21 @@ onMounted(() => void credentialService.fetchCredentials())
 <template>
   <div class="p-4 md:p-6 lg:p-8">
     <Card
+      gap="none"
       class="overflow-hidden rounded-2xl shadow-sm shadow-black/5 ring-1 ring-black/4"
     >
-      <CardHeader
-        class="flex flex-row items-center justify-between border-b px-6 py-5"
-      >
-        <CardTitle class="text-2xl font-bold tracking-tight">
-          Kartu Presensi
-        </CardTitle>
+      <CardHeader standard>
+        <CardTitle size="lg"> Kartu Presensi </CardTitle>
         <Button @click="issueOpen = true">
           <Plus class="mr-2 h-4 w-4" />
           Terbitkan
         </Button>
       </CardHeader>
 
-      <div class="p-6 space-y-6">
+      <CardContent
+        variant="standard"
+        class="space-y-6"
+      >
         <DataTable
           v-model:page="store.page"
           v-model:page-size="store.limit"
@@ -79,7 +84,7 @@ onMounted(() => void credentialService.fetchCredentials())
         </DataTable>
 
         <IssueCredentialDialog v-model:open="issueOpen" />
-      </div>
+      </CardContent>
     </Card>
   </div>
 </template>

@@ -1,7 +1,12 @@
 ﻿<script setup lang="ts">
 import { DataTable, SearchInput } from '@mts241alikhlash/ui'
 import { Button } from '@mts241alikhlash/ui/button'
-import { Card, CardHeader, CardTitle } from '@mts241alikhlash/ui/card'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from '@mts241alikhlash/ui/card'
 import { Plus } from '@lucide/vue'
 import { onMounted, ref } from 'vue'
 import PositionFormDialog from '../components/PositionFormDialog.vue'
@@ -54,30 +59,24 @@ onMounted(() => {
 <template>
   <div class="p-4 md:p-6 lg:p-8">
     <Card
+      gap="none"
       class="overflow-hidden rounded-2xl shadow-sm shadow-black/5 ring-1 ring-black/4"
     >
-      <CardHeader
-        class="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b px-6 py-5 gap-4"
-      >
+      <CardHeader standard>
         <div>
-          <CardTitle class="text-2xl font-bold tracking-tight">
-            Daftar Jabatan
-          </CardTitle>
+          <CardTitle size="lg"> Daftar Jabatan </CardTitle>
         </div>
         <div
           v-if="can('positions.create')"
           class="flex flex-col sm:flex-row w-full sm:w-auto gap-2"
         >
-          <Button
-            class="w-full sm:w-auto"
-            @click="isAddOpen = true"
-          >
+          <Button @click="isAddOpen = true">
             <Plus class="mr-2 h-4 w-4" /> Tambah Jabatan
           </Button>
         </div>
       </CardHeader>
 
-      <div class="p-6">
+      <CardContent variant="standard">
         <DataTable
           :columns="columns"
           :data="items"
@@ -91,7 +90,7 @@ onMounted(() => {
             />
           </template>
         </DataTable>
-      </div>
+      </CardContent>
     </Card>
 
     <PositionFormDialog

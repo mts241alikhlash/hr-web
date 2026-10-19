@@ -3,7 +3,12 @@ import { lookupService } from '@/features/lookup'
 import { getIndonesianErrorMessage } from '@mts241alikhlash/web-shared/utils/error-handler'
 import { DataTable, DatePicker } from '@mts241alikhlash/ui'
 import { Button } from '@mts241alikhlash/ui/button'
-import { Card, CardHeader, CardTitle } from '@mts241alikhlash/ui/card'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from '@mts241alikhlash/ui/card'
 import {
   Dialog,
   DialogContent,
@@ -85,21 +90,21 @@ onMounted(async () => {
 <template>
   <div class="p-4 md:p-6 lg:p-8">
     <Card
+      gap="none"
       class="overflow-hidden rounded-2xl shadow-sm shadow-black/5 ring-1 ring-black/4"
     >
-      <CardHeader
-        class="flex flex-row items-center justify-between border-b px-6 py-5"
-      >
-        <CardTitle class="text-2xl font-bold tracking-tight">
-          Penugasan Pola Kerja
-        </CardTitle>
+      <CardHeader standard>
+        <CardTitle size="lg"> Penugasan Pola Kerja </CardTitle>
         <Button @click="dialogOpen = true">
           <Plus class="mr-2 h-4 w-4" />
           Tugaskan
         </Button>
       </CardHeader>
 
-      <div class="p-6 space-y-6">
+      <CardContent
+        variant="standard"
+        class="space-y-6"
+      >
         <div>
           <DataTable
             :columns="currentColumns"
@@ -121,7 +126,7 @@ onMounted(async () => {
             item-label="riwayat penugasan"
           />
         </div>
-      </div>
+      </CardContent>
     </Card>
 
     <Dialog v-model:open="dialogOpen">

@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { DataTable } from '@mts241alikhlash/ui'
 import { Button } from '@mts241alikhlash/ui/button'
-import { Card, CardHeader, CardTitle } from '@mts241alikhlash/ui/card'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from '@mts241alikhlash/ui/card'
 import {
   Dialog,
   DialogContent,
@@ -76,17 +81,17 @@ onMounted(() => void leaveService.fetchRequests())
 <template>
   <div class="p-4 md:p-6 lg:p-8">
     <Card
+      gap="none"
       class="overflow-hidden rounded-2xl shadow-sm shadow-black/5 ring-1 ring-black/4"
     >
-      <CardHeader
-        class="flex flex-row items-center justify-between border-b px-6 py-5"
-      >
-        <CardTitle class="text-2xl font-bold tracking-tight">
-          Persetujuan Izin & Cuti
-        </CardTitle>
+      <CardHeader standard>
+        <CardTitle size="lg"> Persetujuan Izin & Cuti </CardTitle>
       </CardHeader>
 
-      <div class="p-6 space-y-6">
+      <CardContent
+        variant="standard"
+        class="space-y-6"
+      >
         <div class="flex flex-wrap items-center gap-3">
           <Select v-model="statusFilter">
             <SelectTrigger class="w-[180px]">
@@ -145,7 +150,7 @@ onMounted(() => void leaveService.fetchRequests())
             </DialogFooter>
           </DialogContent>
         </Dialog>
-      </div>
+      </CardContent>
     </Card>
   </div>
 </template>

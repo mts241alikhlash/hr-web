@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { DataTable } from '@mts241alikhlash/ui'
-import { Card, CardHeader, CardTitle } from '@mts241alikhlash/ui/card'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from '@mts241alikhlash/ui/card'
 import { CheckCircle2, Clock, Timer, XCircle } from '@lucide/vue'
 import { computed, onMounted } from 'vue'
 import { myAttendanceColumns } from '../components/myAttendanceColumns'
@@ -26,17 +31,17 @@ onMounted(() => void employeeAttendanceService.fetchMine())
 <template>
   <div class="p-4 md:p-6 lg:p-8">
     <Card
+      gap="none"
       class="overflow-hidden rounded-2xl shadow-sm shadow-black/5 ring-1 ring-black/4"
     >
-      <CardHeader
-        class="flex flex-row items-center justify-between border-b px-6 py-5"
-      >
-        <CardTitle class="text-2xl font-bold tracking-tight">
-          Kehadiran Saya
-        </CardTitle>
+      <CardHeader standard>
+        <CardTitle size="lg"> Kehadiran Saya </CardTitle>
       </CardHeader>
 
-      <div class="p-6 space-y-6">
+      <CardContent
+        variant="standard"
+        class="space-y-6"
+      >
         <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
           <div class="rounded-xl border bg-card p-4 shadow-sm">
             <div
@@ -95,7 +100,7 @@ onMounted(() => void employeeAttendanceService.fetchMine())
           :is-loading="store.loading"
           item-label="catatan kehadiran saya"
         />
-      </div>
+      </CardContent>
     </Card>
   </div>
 </template>

@@ -2,13 +2,7 @@ import type { ColumnDef } from '@tanstack/vue-table'
 import { h } from 'vue'
 import { Badge } from '@mts241alikhlash/ui/badge'
 import { Button } from '@mts241alikhlash/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@mts241alikhlash/ui/dropdown-menu'
-import { Pencil, Settings2 } from '@lucide/vue'
+import { Pencil } from '@lucide/vue'
 import CorrectionTrailPopover from './CorrectionTrailPopover.vue'
 import { DAY_STATUS_LABEL, hasLeaveConflict, isAnomalousDay } from '../types'
 import type { DailyPresence, PresenceDayStatus } from '../types'
@@ -118,47 +112,13 @@ export function createColumns(
         }
         children.push(
           h(
-            DropdownMenu,
-            {},
+            Button,
             {
-              default: () => [
-                h(
-                  DropdownMenuTrigger,
-                  { asChild: true },
-                  {
-                    default: () =>
-                      h(
-                        Button,
-                        { variant: 'ghost', class: 'h-8 w-8 p-0' },
-                        {
-                          default: () => [
-                            h('span', { class: 'sr-only' }, 'Buka opsi'),
-                            h(Settings2, { class: 'h-4 w-4' }),
-                          ],
-                        },
-                      ),
-                  },
-                ),
-                h(
-                  DropdownMenuContent,
-                  { align: 'end' },
-                  {
-                    default: () => [
-                      h(
-                        DropdownMenuItem,
-                        { onClick: () => onCorrection(day) },
-                        {
-                          default: () => [
-                            h(Pencil, { class: 'mr-2 h-4 w-4' }),
-                            'Koreksi Kehadiran',
-                          ],
-                        },
-                      ),
-                    ],
-                  },
-                ),
-              ],
+              size: 'sm',
+              variant: 'outline',
+              onClick: () => onCorrection(day),
             },
+            () => [h(Pencil, { class: 'size-4 mr-1.5' }), 'Koreksi Kehadiran'],
           ),
         )
         return h(

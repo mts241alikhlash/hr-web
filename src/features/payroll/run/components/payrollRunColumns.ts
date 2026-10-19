@@ -2,13 +2,7 @@ import type { ColumnDef } from '@tanstack/vue-table'
 import { h } from 'vue'
 import { Badge } from '@mts241alikhlash/ui/badge'
 import { Button } from '@mts241alikhlash/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@mts241alikhlash/ui/dropdown-menu'
-import { Eye, Settings2 } from '@lucide/vue'
+import { Eye } from '@lucide/vue'
 import { formatPeriod, formatRupiah } from '../../shared/money'
 import { RUN_KIND_LABEL, RUN_STATUS_LABEL } from '../types'
 import type { PayrollRun } from '../types'
@@ -80,47 +74,9 @@ export function createPayrollRunColumns(
       cell: ({ row }) => {
         const run = row.original
         return h(
-          DropdownMenu,
-          {},
-          {
-            default: () => [
-              h(
-                DropdownMenuTrigger,
-                { asChild: true },
-                {
-                  default: () =>
-                    h(
-                      Button,
-                      { variant: 'ghost', class: 'h-8 w-8 p-0' },
-                      {
-                        default: () => [
-                          h('span', { class: 'sr-only' }, 'Buka menu'),
-                          h(Settings2, { class: 'h-4 w-4' }),
-                        ],
-                      },
-                    ),
-                },
-              ),
-              h(
-                DropdownMenuContent,
-                { align: 'end' },
-                {
-                  default: () => [
-                    h(
-                      DropdownMenuItem,
-                      { onClick: () => onViewDetail(run) },
-                      {
-                        default: () => [
-                          h(Eye, { class: 'mr-2 h-4 w-4' }),
-                          'Lihat Detail',
-                        ],
-                      },
-                    ),
-                  ],
-                },
-              ),
-            ],
-          },
+          Button,
+          { size: 'sm', variant: 'outline', onClick: () => onViewDetail(run) },
+          () => [h(Eye, { class: 'size-4 mr-1.5' }), 'Lihat Detail'],
         )
       },
     },

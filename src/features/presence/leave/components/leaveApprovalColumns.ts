@@ -1,14 +1,8 @@
 import type { ColumnDef } from '@tanstack/vue-table'
 import { h } from 'vue'
 import { Badge } from '@mts241alikhlash/ui/badge'
-import { Button } from '@mts241alikhlash/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@mts241alikhlash/ui/dropdown-menu'
-import { Check, Settings2, X } from '@lucide/vue'
+import { ActionCell } from '@mts241alikhlash/ui'
+import { Check, X } from '@lucide/vue'
 import { STATUS_LABEL, STATUS_VARIANT } from '../types'
 import type { LeaveRequest } from '../types'
 
@@ -100,69 +94,25 @@ export function createLeaveApprovalColumns(
           )
         }
 
-        return h(
-          DropdownMenu,
-          {},
-          {
-            default: () => [
-              h(
-                DropdownMenuTrigger,
-                { asChild: true },
-                {
-                  default: () =>
-                    h(
-                      Button,
-                      {
-                        variant: 'ghost',
-                        class: 'h-8 w-8 p-0',
-                        disabled: isSaving,
-                      },
-                      {
-                        default: () => [
-                          h('span', { class: 'sr-only' }, 'Buka opsi'),
-                          h(Settings2, { class: 'h-4 w-4' }),
-                        ],
-                      },
-                    ),
-                },
-              ),
-              h(
-                DropdownMenuContent,
-                { align: 'end' },
-                {
-                  default: () => [
-                    h(
-                      DropdownMenuItem,
-                      {
-                        onClick: () => onApprove(req.id),
-                        class: 'text-emerald-600 font-medium',
-                      },
-                      {
-                        default: () => [
-                          h(Check, { class: 'mr-2 h-4 w-4 text-emerald-600' }),
-                          'Setujui Pengajuan',
-                        ],
-                      },
-                    ),
-                    h(
-                      DropdownMenuItem,
-                      {
-                        onClick: () => onReject(req.id),
-                        class: 'text-destructive font-medium',
-                      },
-                      {
-                        default: () => [
-                          h(X, { class: 'mr-2 h-4 w-4 text-destructive' }),
-                          'Tolak Pengajuan',
-                        ],
-                      },
-                    ),
-                  ],
-                },
-              ),
-            ],
-          },
-        )
+        return h(ActionCell, {
+          hideEdit: true,
+          hideDelete: true,
+          items: [
+            {
+              label: 'Setujui Pengajuan',
+              icon: Check,
+              disabled: isSaving,
+              onClick: () => onApprove(req.id),
+            },
+            {
+              label: 'Tolak Pengajuan',
+              icon: X,
+              destructive: true,
+              disabled: isSaving,
+              onClick: () => onReject(req.id),
+            },
+          ],
+        })
       },
     },
   ]
