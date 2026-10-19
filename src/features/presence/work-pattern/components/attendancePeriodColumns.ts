@@ -2,13 +2,7 @@ import type { ColumnDef } from '@tanstack/vue-table'
 import { h } from 'vue'
 import { Badge } from '@mts241alikhlash/ui/badge'
 import { Button } from '@mts241alikhlash/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@mts241alikhlash/ui/dropdown-menu'
-import { Lock, Settings2 } from '@lucide/vue'
+import { Lock } from '@lucide/vue'
 
 import type { AttendancePeriodRow } from '../types'
 
@@ -43,47 +37,13 @@ export function createAttendancePeriodColumns(
         if (isClosed) return null
 
         return h(
-          DropdownMenu,
-          {},
+          Button,
           {
-            default: () => [
-              h(
-                DropdownMenuTrigger,
-                { asChild: true },
-                {
-                  default: () =>
-                    h(
-                      Button,
-                      { variant: 'ghost', class: 'h-8 w-8 p-0' },
-                      {
-                        default: () => [
-                          h('span', { class: 'sr-only' }, 'Buka menu'),
-                          h(Settings2, { class: 'h-4 w-4' }),
-                        ],
-                      },
-                    ),
-                },
-              ),
-              h(
-                DropdownMenuContent,
-                { align: 'end' },
-                {
-                  default: () => [
-                    h(
-                      DropdownMenuItem,
-                      { onClick: () => onClosePeriod(row.original.month) },
-                      {
-                        default: () => [
-                          h(Lock, { class: 'mr-2 h-4 w-4' }),
-                          'Tutup Periode',
-                        ],
-                      },
-                    ),
-                  ],
-                },
-              ),
-            ],
+            size: 'sm',
+            variant: 'outline',
+            onClick: () => onClosePeriod(row.original.month),
           },
+          () => [h(Lock, { class: 'size-4 mr-1.5' }), 'Tutup Periode'],
         )
       },
     },

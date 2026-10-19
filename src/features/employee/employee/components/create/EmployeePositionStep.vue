@@ -49,14 +49,11 @@ const emit = defineEmits<{
         <Card
           v-for="(pos, index) in extraPositions"
           :key="index"
+          gap="none"
           class="overflow-hidden rounded-xl border bg-card shadow-xs transition-all hover:border-primary/20"
         >
-          <CardHeader
-            class="flex flex-row items-center justify-between border-b px-5 py-3 bg-muted/20"
-          >
-            <CardTitle class="text-xs font-semibold">
-              Jabatan {{ index + 1 }}
-            </CardTitle>
+          <CardHeader standard>
+            <CardTitle size="md"> Jabatan {{ index + 1 }} </CardTitle>
             <Button
               size="icon"
               variant="ghost"

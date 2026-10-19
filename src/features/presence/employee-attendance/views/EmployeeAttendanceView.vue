@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import { Card, CardHeader, CardTitle } from '@mts241alikhlash/ui/card'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from '@mts241alikhlash/ui/card'
 import { DataTable, DatePicker } from '@mts241alikhlash/ui'
 import { Button } from '@mts241alikhlash/ui/button'
 import { AlertTriangle, Plus } from '@lucide/vue'
@@ -34,21 +39,21 @@ onMounted(() => void employeeAttendanceService.fetchDay())
 <template>
   <div class="p-4 md:p-6 lg:p-8">
     <Card
+      gap="none"
       class="overflow-hidden rounded-2xl shadow-sm shadow-black/5 ring-1 ring-black/4"
     >
-      <CardHeader
-        class="flex flex-row items-center justify-between border-b px-6 py-5"
-      >
-        <CardTitle class="text-2xl font-bold tracking-tight">
-          Kehadiran Pegawai
-        </CardTitle>
+      <CardHeader standard>
+        <CardTitle size="lg"> Kehadiran Pegawai </CardTitle>
         <Button @click="manualOpen = true">
           <Plus class="mr-2 h-4 w-4" />
           Catat Manual
         </Button>
       </CardHeader>
 
-      <div class="p-6 space-y-6">
+      <CardContent
+        variant="standard"
+        class="space-y-6"
+      >
         <div class="flex flex-wrap items-center gap-3">
           <DatePicker
             v-model="store.selectedDate"
@@ -79,7 +84,7 @@ onMounted(() => void employeeAttendanceService.fetchDay())
           :record="selected"
         />
         <ManualEntryDialog v-model:open="manualOpen" />
-      </div>
+      </CardContent>
     </Card>
   </div>
 </template>

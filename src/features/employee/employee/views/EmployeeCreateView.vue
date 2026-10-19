@@ -47,18 +47,20 @@ const {
 <template>
   <div class="p-4 md:p-6 lg:p-8">
     <Card
-      class="overflow-hidden rounded-2xl shadow-sm shadow-black/5 ring-1 ring-black/4 py-0"
+      gap="none"
+      class="overflow-hidden rounded-2xl shadow-sm shadow-black/5 ring-1 ring-black/4"
     >
       <CardHeader
-        class="flex flex-row items-center gap-3 border-b px-6 pt-5! pb-5!"
+        standard
+        class="pt-5! pb-5!"
       >
-        <BackButton
-          label="Kembali ke daftar pegawai"
-          @click="router.push('/employees')"
-        />
-        <CardTitle class="text-2xl font-bold tracking-tight">
-          Tambah Pegawai Baru
-        </CardTitle>
+        <div class="flex items-center gap-3">
+          <BackButton
+            label="Kembali ke daftar pegawai"
+            @click="router.push('/employees')"
+          />
+          <CardTitle size="lg"> Tambah Pegawai Baru </CardTitle>
+        </div>
       </CardHeader>
 
       <div class="px-6 py-4 border-b">

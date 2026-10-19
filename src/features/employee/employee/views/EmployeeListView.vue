@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { DataTable, SearchInput } from '@mts241alikhlash/ui'
 import { Button } from '@mts241alikhlash/ui/button'
-import { Card, CardHeader, CardTitle } from '@mts241alikhlash/ui/card'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from '@mts241alikhlash/ui/card'
 import {
   Select,
   SelectContent,
@@ -224,15 +229,12 @@ onMounted(() => {
 <template>
   <div class="p-4 md:p-6 lg:p-8">
     <Card
+      gap="none"
       class="overflow-hidden rounded-2xl shadow-sm shadow-black/5 ring-1 ring-black/4"
     >
-      <CardHeader
-        class="flex flex-row items-center justify-between border-b px-6 py-5 gap-4"
-      >
+      <CardHeader standard>
         <div>
-          <CardTitle class="text-xl sm:text-2xl font-bold tracking-tight">
-            Daftar Pegawai
-          </CardTitle>
+          <CardTitle size="lg"> Daftar Pegawai </CardTitle>
         </div>
         <div class="flex items-center gap-2">
           <div class="hidden sm:flex items-center gap-2">
@@ -292,7 +294,7 @@ onMounted(() => {
         </div>
       </CardHeader>
 
-      <div class="p-6">
+      <CardContent variant="standard">
         <div class="mb-6">
           <div class="hidden lg:flex lg:flex-row lg:items-center gap-3">
             <Select
@@ -373,7 +375,7 @@ onMounted(() => {
             </template>
           </DataTable>
         </div>
-      </div>
+      </CardContent>
     </Card>
   </div>
 

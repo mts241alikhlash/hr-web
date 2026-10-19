@@ -1,13 +1,7 @@
 import type { ColumnDef } from '@tanstack/vue-table'
 import { h } from 'vue'
 import { Button } from '@mts241alikhlash/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@mts241alikhlash/ui/dropdown-menu'
-import { Settings2, Trash2 } from '@lucide/vue'
+import { Trash2 } from '@lucide/vue'
 import type { NonWorkingDay } from '../types'
 
 function formatDate(value: string) {
@@ -46,52 +40,14 @@ export function createNonWorkingDayColumns(
       cell: ({ row }) => {
         const day = row.original
         return h(
-          DropdownMenu,
-          {},
+          Button,
           {
-            default: () => [
-              h(
-                DropdownMenuTrigger,
-                { asChild: true },
-                {
-                  default: () =>
-                    h(
-                      Button,
-                      { variant: 'ghost', class: 'h-8 w-8 p-0' },
-                      {
-                        default: () => [
-                          h('span', { class: 'sr-only' }, 'Buka menu'),
-                          h(Settings2, { class: 'h-4 w-4' }),
-                        ],
-                      },
-                    ),
-                },
-              ),
-              h(
-                DropdownMenuContent,
-                { align: 'end' },
-                {
-                  default: () => [
-                    h(
-                      DropdownMenuItem,
-                      {
-                        onClick: () => onDelete(day),
-                        class: 'text-destructive font-medium',
-                      },
-                      {
-                        default: () => [
-                          h(Trash2, {
-                            class: 'mr-2 h-4 w-4 text-destructive',
-                          }),
-                          'Hapus',
-                        ],
-                      },
-                    ),
-                  ],
-                },
-              ),
-            ],
+            size: 'sm',
+            variant: 'outline',
+            class: 'text-destructive',
+            onClick: () => onDelete(day),
           },
+          () => [h(Trash2, { class: 'size-4 mr-1.5' }), 'Hapus'],
         )
       },
     },

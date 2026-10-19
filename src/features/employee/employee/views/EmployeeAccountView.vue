@@ -2,7 +2,12 @@
 import { useEmployee } from '../composables/useEmployee'
 import { createAccountColumns } from '../components/columns'
 import { DataTable, SearchInput } from '@mts241alikhlash/ui'
-import { Card, CardHeader, CardTitle } from '@mts241alikhlash/ui/card'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from '@mts241alikhlash/ui/card'
 import { Button } from '@mts241alikhlash/ui/button'
 import {
   Select,
@@ -123,18 +128,18 @@ onMounted(() => {
 <template>
   <div class="p-4 md:p-6 lg:p-8">
     <Card
+      gap="none"
       class="overflow-hidden rounded-2xl shadow-sm shadow-black/5 ring-1 ring-black/4"
     >
-      <CardHeader
-        class="border-b px-6 py-5 flex flex-row items-center justify-between"
-      >
+      <CardHeader standard>
         <div>
-          <CardTitle class="text-xl sm:text-2xl font-bold tracking-tight">
-            Akun Pegawai
-          </CardTitle>
+          <CardTitle size="lg"> Akun Pegawai </CardTitle>
         </div>
       </CardHeader>
-      <div class="p-6 w-full">
+      <CardContent
+        variant="standard"
+        class="w-full"
+      >
         <div class="mb-6">
           <div class="hidden lg:flex lg:flex-row lg:items-center gap-3">
             <Select
@@ -232,7 +237,7 @@ onMounted(() => {
             />
           </template>
         </DataTable>
-      </div>
+      </CardContent>
     </Card>
   </div>
 

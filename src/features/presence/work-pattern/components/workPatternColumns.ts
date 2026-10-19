@@ -1,14 +1,8 @@
 import type { ColumnDef } from '@tanstack/vue-table'
 import { h } from 'vue'
 import { Badge } from '@mts241alikhlash/ui/badge'
-import { Button } from '@mts241alikhlash/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@mts241alikhlash/ui/dropdown-menu'
-import { Pencil, Settings2, Trash2 } from '@lucide/vue'
+import { ActionCell } from '@mts241alikhlash/ui'
+import { Pencil, Trash2 } from '@lucide/vue'
 import type { WorkPattern } from '../types'
 
 export function createWorkPatternColumns(
@@ -54,66 +48,23 @@ export function createWorkPatternColumns(
       meta: { align: 'center' },
       cell: ({ row }) => {
         const pattern = row.original
-        return h(
-          DropdownMenu,
-          {},
-          {
-            default: () => [
-              h(
-                DropdownMenuTrigger,
-                { asChild: true },
-                {
-                  default: () =>
-                    h(
-                      Button,
-                      { variant: 'ghost', class: 'h-8 w-8 p-0' },
-                      {
-                        default: () => [
-                          h('span', { class: 'sr-only' }, 'Buka menu'),
-                          h(Settings2, { class: 'h-4 w-4' }),
-                        ],
-                      },
-                    ),
-                },
-              ),
-              h(
-                DropdownMenuContent,
-                { align: 'end' },
-                {
-                  default: () => [
-                    h(
-                      DropdownMenuItem,
-                      { onClick: () => onEdit(pattern) },
-                      {
-                        default: () => [
-                          h(Pencil, { class: 'mr-2 h-4 w-4' }),
-                          'Ubah',
-                        ],
-                      },
-                    ),
-                    !pattern.isDefault
-                      ? h(
-                          DropdownMenuItem,
-                          {
-                            onClick: () => onDelete(pattern),
-                            class: 'text-destructive font-medium',
-                          },
-                          {
-                            default: () => [
-                              h(Trash2, {
-                                class: 'mr-2 h-4 w-4 text-destructive',
-                              }),
-                              'Hapus',
-                            ],
-                          },
-                        )
-                      : null,
-                  ],
-                },
-              ),
-            ],
-          },
-        )
+        return h(ActionCell, {
+          hideEdit: true,
+          hideDelete: true,
+          items: [
+            { label: 'Ubah', icon: Pencil, onClick: () => onEdit(pattern) },
+            ...(pattern.isDefault
+              ? []
+              : [
+                  {
+                    label: 'Hapus',
+                    icon: Trash2,
+                    destructive: true,
+                    onClick: () => onDelete(pattern),
+                  },
+                ]),
+          ],
+        })
       },
     },
   ]

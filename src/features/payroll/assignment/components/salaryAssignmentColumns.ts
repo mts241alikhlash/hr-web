@@ -2,13 +2,7 @@ import type { ColumnDef } from '@tanstack/vue-table'
 import { h } from 'vue'
 import { Badge } from '@mts241alikhlash/ui/badge'
 import { Button } from '@mts241alikhlash/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@mts241alikhlash/ui/dropdown-menu'
-import { Settings2, Trash2 } from '@lucide/vue'
+import { Trash2 } from '@lucide/vue'
 import { DRIVER_LABEL } from '../../component'
 import { formatRupiah } from '../../shared/money'
 import type { SalaryAssignment } from '../types'
@@ -74,50 +68,14 @@ export function createCurrentSalaryAssignmentColumns(
       cell: ({ row }) => {
         const item = row.original
         return h(
-          DropdownMenu,
-          {},
+          Button,
           {
-            default: () => [
-              h(
-                DropdownMenuTrigger,
-                { asChild: true },
-                {
-                  default: () =>
-                    h(
-                      Button,
-                      { variant: 'ghost', class: 'h-8 w-8 p-0' },
-                      {
-                        default: () => [
-                          h('span', { class: 'sr-only' }, 'Buka menu'),
-                          h(Settings2, { class: 'h-4 w-4' }),
-                        ],
-                      },
-                    ),
-                },
-              ),
-              h(
-                DropdownMenuContent,
-                { align: 'end' },
-                {
-                  default: () => [
-                    h(
-                      DropdownMenuItem,
-                      {
-                        onClick: () => onRemove(item),
-                        class: 'text-destructive font-medium',
-                      },
-                      {
-                        default: () => [
-                          h(Trash2, { class: 'mr-2 h-4 w-4 text-destructive' }),
-                          'Hapus Penetapan',
-                        ],
-                      },
-                    ),
-                  ],
-                },
-              ),
-            ],
+            size: 'sm',
+            variant: 'outline',
+            class: 'text-destructive',
+            onClick: () => onRemove(item),
           },
+          () => [h(Trash2, { class: 'size-4 mr-1.5' }), 'Hapus Penetapan'],
         )
       },
     },

@@ -11,7 +11,12 @@ import {
   AlertDialogTitle,
 } from '@mts241alikhlash/ui/alert-dialog'
 import { Button, buttonVariants } from '@mts241alikhlash/ui/button'
-import { Card, CardHeader, CardTitle } from '@mts241alikhlash/ui/card'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from '@mts241alikhlash/ui/card'
 import { Plus } from '@lucide/vue'
 import { computed, onMounted, ref } from 'vue'
 import SalaryComponentFormDialog from '../components/SalaryComponentFormDialog.vue'
@@ -63,28 +68,28 @@ onMounted(() => void salaryComponentService.fetch())
 <template>
   <div class="p-4 md:p-6 lg:p-8">
     <Card
+      gap="none"
       class="overflow-hidden rounded-2xl shadow-sm shadow-black/5 ring-1 ring-black/4"
     >
-      <CardHeader
-        class="flex flex-row items-center justify-between border-b px-6 py-5"
-      >
-        <CardTitle class="text-2xl font-bold tracking-tight">
-          Komponen Gaji
-        </CardTitle>
+      <CardHeader standard>
+        <CardTitle size="lg"> Komponen Gaji </CardTitle>
         <Button @click="startNew">
           <Plus class="mr-2 h-4 w-4" />
           Tambah Komponen
         </Button>
       </CardHeader>
 
-      <div class="p-6 space-y-6">
+      <CardContent
+        variant="standard"
+        class="space-y-6"
+      >
         <DataTable
           :columns="tableColumns"
           :data="components"
           :is-loading="loading"
           item-label="komponen gaji"
         />
-      </div>
+      </CardContent>
     </Card>
 
     <SalaryComponentFormDialog

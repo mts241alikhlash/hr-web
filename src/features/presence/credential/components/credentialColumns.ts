@@ -2,13 +2,7 @@ import type { ColumnDef } from '@tanstack/vue-table'
 import { h } from 'vue'
 import { Badge } from '@mts241alikhlash/ui/badge'
 import { Button } from '@mts241alikhlash/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@mts241alikhlash/ui/dropdown-menu'
-import { Ban, Settings2 } from '@lucide/vue'
+import { Ban } from '@lucide/vue'
 import type { Credential, CredentialStatus } from '../types'
 
 const STATUS_LABEL: Record<CredentialStatus, string> = {
@@ -80,50 +74,14 @@ export function createCredentialColumns(
         if (item.status !== 'ACTIVE') return null
 
         return h(
-          DropdownMenu,
-          {},
+          Button,
           {
-            default: () => [
-              h(
-                DropdownMenuTrigger,
-                { asChild: true },
-                {
-                  default: () =>
-                    h(
-                      Button,
-                      { variant: 'ghost', class: 'h-8 w-8 p-0' },
-                      {
-                        default: () => [
-                          h('span', { class: 'sr-only' }, 'Buka menu'),
-                          h(Settings2, { class: 'h-4 w-4' }),
-                        ],
-                      },
-                    ),
-                },
-              ),
-              h(
-                DropdownMenuContent,
-                { align: 'end' },
-                {
-                  default: () => [
-                    h(
-                      DropdownMenuItem,
-                      {
-                        onClick: () => onRevoke(item),
-                        class: 'text-destructive font-medium',
-                      },
-                      {
-                        default: () => [
-                          h(Ban, { class: 'mr-2 h-4 w-4 text-destructive' }),
-                          'Cabut Kartu',
-                        ],
-                      },
-                    ),
-                  ],
-                },
-              ),
-            ],
+            size: 'sm',
+            variant: 'outline',
+            class: 'text-destructive',
+            onClick: () => onRevoke(item),
           },
+          () => [h(Ban, { class: 'size-4 mr-1.5' }), 'Cabut Kartu'],
         )
       },
     },

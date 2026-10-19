@@ -2,13 +2,7 @@ import type { ColumnDef } from '@tanstack/vue-table'
 import { h } from 'vue'
 import { Badge } from '@mts241alikhlash/ui/badge'
 import { Button } from '@mts241alikhlash/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@mts241alikhlash/ui/dropdown-menu'
-import { KeyRound, Settings2 } from '@lucide/vue'
+import { KeyRound } from '@lucide/vue'
 import type { GateDevice } from '../types'
 
 function lastSeenLabel(value?: string | null) {
@@ -79,47 +73,16 @@ export function createDeviceColumns(
       cell: ({ row }) => {
         const device = row.original
         return h(
-          DropdownMenu,
-          {},
+          Button,
           {
-            default: () => [
-              h(
-                DropdownMenuTrigger,
-                { asChild: true },
-                {
-                  default: () =>
-                    h(
-                      Button,
-                      { variant: 'ghost', class: 'h-8 w-8 p-0' },
-                      {
-                        default: () => [
-                          h('span', { class: 'sr-only' }, 'Buka menu'),
-                          h(Settings2, { class: 'h-4 w-4' }),
-                        ],
-                      },
-                    ),
-                },
-              ),
-              h(
-                DropdownMenuContent,
-                { align: 'end' },
-                {
-                  default: () => [
-                    h(
-                      DropdownMenuItem,
-                      { onClick: () => onRotateToken(device) },
-                      {
-                        default: () => [
-                          h(KeyRound, { class: 'mr-2 h-4 w-4' }),
-                          'Terbitkan Token Baru',
-                        ],
-                      },
-                    ),
-                  ],
-                },
-              ),
-            ],
+            size: 'sm',
+            variant: 'outline',
+            onClick: () => onRotateToken(device),
           },
+          () => [
+            h(KeyRound, { class: 'size-4 mr-1.5' }),
+            'Terbitkan Token Baru',
+          ],
         )
       },
     },
