@@ -55,7 +55,7 @@ describe('buildResolveDecisions', () => {
     expect(buildResolveDecisions(rows, {})).toEqual([])
   })
 
-  it('keeps a CONFLICT row without an existingId and honours its action', () => {
+  it('keeps a CONFLICT row without an existingId and honors its action', () => {
     const rows: ImportPreviewRow<Row>[] = [
       { row: 1, status: 'CONFLICT', data: { name: 'A' } },
     ]
