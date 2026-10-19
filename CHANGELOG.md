@@ -1,5 +1,11 @@
 # hr-web
 
+## 1.4.2
+
+### Patch Changes
+
+- 3155451: Card, judul, dan isi memakai standar `@mts241alikhlash/ui` 1.8; field profil, alamat, dan login memakai `FloatingField`; delapan menu satu aksi menjadi tombol langsung dan empat menu kustom memakai `ActionCell items`.
+
 ## 1.4.1
 
 ### Patch Changes

@@ -1,7 +1,7 @@
 {
   "name": "hr-web",
   "private": true,
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "241 HR: staff, attendance, leave and payroll web app",
   "type": "module",
   "scripts": {
