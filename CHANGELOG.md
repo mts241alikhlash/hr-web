@@ -1,5 +1,11 @@
 # hr-web
 
+## 1.4.3
+
+### Patch Changes
+
+- 328b9ad: Ejaan Amerika di kode, komentar, dan nama test (`honours` menjadi `honors`, `enrolment` menjadi `enrollment`, dan sejenisnya).
+
 ## 1.4.2
 
 ### Patch Changes
