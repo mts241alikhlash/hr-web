@@ -6,7 +6,7 @@ import {
 } from './utils'
 
 describe('buildEmployeeCreatePayload', () => {
-  it('maps form values into a create payload, using nip as identifier/password when present', () => {
+  it('maps form values into a create payload, using nip as identifier and sending no password', () => {
     const payload = buildEmployeeCreatePayload({
       name: 'Budi',
       nik: '1234567890123456',
@@ -30,7 +30,7 @@ describe('buildEmployeeCreatePayload', () => {
       employmentTypeId: 'et-1',
       positionId: 'pos-1',
       identifier: '987654321',
-      password: '987654321',
+      password: undefined,
       email: undefined,
       phone: undefined,
       nip: '987654321',
@@ -38,7 +38,7 @@ describe('buildEmployeeCreatePayload', () => {
     })
   })
 
-  it('falls back to nik as identifier/password when nip is empty', () => {
+  it('falls back to nik as identifier when nip is empty', () => {
     const payload = buildEmployeeCreatePayload({
       name: 'Budi',
       nik: '1234567890123456',
@@ -52,7 +52,7 @@ describe('buildEmployeeCreatePayload', () => {
     })
 
     expect(payload.identifier).toBe('1234567890123456')
-    expect(payload.password).toBe('1234567890123456')
+    expect(payload.password).toBeUndefined()
     expect(payload.positionId).toBeUndefined()
   })
 })

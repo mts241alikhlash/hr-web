@@ -51,7 +51,7 @@ describe('useEmployeeCreateForm', () => {
         employmentTypeId: '550e8400-e29b-41d4-a716-446655440007',
         positionId: undefined,
         identifier: '1234567890123456',
-        password: '1234567890123456',
+        password: undefined,
         email: undefined,
         phone: undefined,
         nip: undefined,

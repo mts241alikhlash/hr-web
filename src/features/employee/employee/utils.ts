@@ -47,7 +47,6 @@ export function buildEmployeeCreatePayload(
     employmentTypeId: values.employmentTypeId as string,
     positionId: (values.positionId as string) || undefined,
     identifier: (values.nip as string) || (values.nik as string),
-    password: (values.nip as string) || (values.nik as string),
     email: (values.email as string) || undefined,
     phone: (values.phone as string) || undefined,
     nip: (values.nip as string) || undefined,
