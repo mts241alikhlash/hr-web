@@ -252,7 +252,7 @@ onMounted(() => {
               v-if="can('employees.create')"
               size="sm"
               class="h-10 px-4"
-              @click="router.push('/employees/create')"
+              @click="router.push('/staff/create')"
             >
               <Plus class="size-4 mr-2" />
               Tambah Pegawai
@@ -277,7 +277,7 @@ onMounted(() => {
                 align="end"
                 class="w-48"
               >
-                <DropdownMenuItem @click="router.push('/employees/create')">
+                <DropdownMenuItem @click="router.push('/staff/create')">
                   <Plus class="size-4 mr-2 text-muted-foreground" />
                   Tambah Pegawai
                 </DropdownMenuItem>

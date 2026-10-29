@@ -2,7 +2,7 @@
 
 export const employeeRoutes: RouteRecordRaw[] = [
   {
-    path: '/employees',
+    path: '/staff',
     name: 'employee',
     component: () => import('./views/EmployeeListView.vue'),
     meta: {
@@ -16,7 +16,7 @@ export const employeeRoutes: RouteRecordRaw[] = [
     },
   },
   {
-    path: '/employees/create',
+    path: '/staff/create',
     name: 'employee-create',
     component: () => import('./views/EmployeeCreateView.vue'),
     meta: {
@@ -24,13 +24,13 @@ export const employeeRoutes: RouteRecordRaw[] = [
       requiredPermission: 'employees.read',
       title: 'Tambah Pegawai',
       breadcrumbs: [
-        { title: 'Pegawai', href: '/employees' },
+        { title: 'Pegawai', href: '/staff' },
         { title: 'Tambah Pegawai' },
       ],
     },
   },
   {
-    path: '/employees/accounts',
+    path: '/staff/accounts',
     name: 'employee-accounts',
     component: () => import('./views/EmployeeAccountView.vue'),
     meta: {
@@ -38,7 +38,7 @@ export const employeeRoutes: RouteRecordRaw[] = [
       requiredPermission: 'users.read',
       title: 'Akun Pegawai',
       breadcrumbs: [
-        { title: 'Pegawai', href: '/employees' },
+        { title: 'Pegawai', href: '/staff' },
         { title: 'Akun Pegawai' },
       ],
     },

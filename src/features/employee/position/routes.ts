@@ -2,7 +2,7 @@
 
 export const positionRoutes: RouteRecordRaw[] = [
   {
-    path: '/positions',
+    path: '/job-positions',
     name: 'positions',
     component: () => import('./views/PositionView.vue'),
     meta: {
@@ -11,7 +11,7 @@ export const positionRoutes: RouteRecordRaw[] = [
       title: 'Kelola Jabatan',
       breadcrumbs: [
         { title: 'Pengaturan', href: '#' },
-        { title: 'Jabatan', href: '/positions' },
+        { title: 'Jabatan', href: '/job-positions' },
       ],
     },
   },

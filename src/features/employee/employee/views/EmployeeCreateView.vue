@@ -57,7 +57,7 @@ const {
         <div class="flex items-center gap-3">
           <BackButton
             label="Kembali ke daftar pegawai"
-            @click="router.push('/employees')"
+            @click="router.push('/staff')"
           />
           <CardTitle size="lg"> Tambah Pegawai Baru </CardTitle>
         </div>
