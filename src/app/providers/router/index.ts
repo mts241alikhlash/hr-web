@@ -18,6 +18,7 @@ import { positionCategoryRoutes } from '@/features/employee/position-category/ro
 import { employmentTypeRoutes } from '@/features/employee/employment-type/routes'
 import { createRouter, createWebHistory } from 'vue-router'
 import { authSessionService, useAuthStore } from '@/features/platform/auth'
+import { profileRoutes } from '@/features/platform/profile'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -47,6 +48,7 @@ const router = createRouter({
         ...salaryAssignmentRoutes,
         ...payrollRunRoutes,
         ...payslipRoutes,
+        ...profileRoutes,
       ],
     },
     {

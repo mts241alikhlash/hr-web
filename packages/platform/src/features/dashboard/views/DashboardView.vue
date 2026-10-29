@@ -116,10 +116,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="p-4 md:p-6 lg:p-8">
+  <div class="space-y-6 p-4 sm:p-6">
     <Card
       gap="none"
-      class="overflow-hidden rounded-2xl shadow-sm shadow-black/5 ring-1 ring-black/4"
+      class="overflow-hidden"
     >
       <CardHeader standard>
         <div>
@@ -128,7 +128,7 @@ onMounted(() => {
         <Button
           variant="outline"
           size="sm"
-          class="shrink-0 h-9 gap-2 shadow-2xs"
+          class="shrink-0 gap-2"
           :disabled="loading"
           @click="fetchSummary()"
         >
@@ -159,8 +159,8 @@ onMounted(() => {
               </div>
             </div>
             <div class="flex flex-wrap gap-2.5">
-              <Skeleton class="h-9 w-36 rounded-lg" />
-              <Skeleton class="h-9 w-32 rounded-lg" />
+              <Skeleton class="h-8 w-36 rounded-md" />
+              <Skeleton class="h-8 w-32 rounded-md" />
             </div>
           </div>
 

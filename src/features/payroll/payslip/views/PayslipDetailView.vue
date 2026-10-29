@@ -24,7 +24,7 @@ useBreadcrumbs(() => {
 </script>
 
 <template>
-  <div class="space-y-4 p-4 md:p-6 lg:p-8">
+  <div class="space-y-4 p-4 sm:p-6">
     <PayslipCard
       v-if="payslip"
       :payslip="payslip"

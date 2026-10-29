@@ -14,10 +14,12 @@ export const authApi = {
     return api.post<ApiEnvelope<LoginResponse>>('/auth/login', payload)
   },
 
-  googleStartUrl: (returnOrigin?: string) => {
+  googleStartUrl: (returnOrigin?: string, intent?: 'signin' | 'signup') => {
     const base = `${API_BASE_URL}/auth/google`
     if (!returnOrigin) return base
-    return `${base}?redirect=${encodeURIComponent(returnOrigin)}`
+    const params = new URLSearchParams({ redirect: returnOrigin })
+    if (intent === 'signup') params.set('intent', 'signup')
+    return `${base}?${params.toString()}`
   },
 
   me: () => {
