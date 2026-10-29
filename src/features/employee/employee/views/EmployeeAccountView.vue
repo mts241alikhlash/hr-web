@@ -126,12 +126,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="p-4 md:p-6 lg:p-8">
+  <div class="px-4 pb-4 pt-1 sm:px-6 sm:pb-6 sm:pt-2">
     <Card
       gap="none"
-      class="overflow-hidden rounded-2xl shadow-sm shadow-black/5 ring-1 ring-black/4"
+      class="overflow-visible rounded-none border-0 bg-transparent shadow-none ring-0"
     >
-      <CardHeader standard>
+      <CardHeader
+        standard
+        class="min-h-0 border-b-0 bg-transparent px-0 pt-0 pb-3 sm:px-0"
+      >
         <div>
           <CardTitle size="lg"> Akun Pegawai </CardTitle>
         </div>

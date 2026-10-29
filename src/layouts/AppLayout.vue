@@ -18,58 +18,44 @@ import {
   CommandList,
 } from '@mts241alikhlash/ui/command'
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@mts241alikhlash/ui/dropdown-menu'
-import { Avatar, AvatarFallback, AvatarImage } from '@mts241alikhlash/ui/avatar'
-import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from '@mts241alikhlash/ui/dialog'
-import { Input } from '@mts241alikhlash/ui/input'
-import { Label } from '@mts241alikhlash/ui/label'
-import { Separator } from '@mts241alikhlash/ui/separator'
-import { SidebarProvider, SidebarTrigger } from '@mts241alikhlash/ui/sidebar'
-import { TooltipProvider } from '@mts241alikhlash/ui/tooltip'
+import ChangePasswordSection from '@/features/platform/profile/components/ChangePasswordSection.vue'
+import { NavUser } from '@mts241alikhlash/ui'
 import {
-  AppSwitcher,
-  authConfig,
-  ssoService,
-  useAuthSession,
-} from '@/features/platform/auth'
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from '@mts241alikhlash/ui/sidebar'
+import { TooltipProvider } from '@mts241alikhlash/ui/tooltip'
+import HeaderAppSwitcher from '@/components/layout/HeaderAppSwitcher.vue'
+import { useAuthSession } from '@/features/platform/auth'
 import { menuSections } from '@/config/menuConfig'
-import { KeyRound, LogOut, Search, UserRound } from '@lucide/vue'
+import { Menu, Search } from '@lucide/vue'
 import { useRoute, useRouter } from 'vue-router'
 import type { BreadcrumbItemType } from '@mts241alikhlash/web-shared/types/breadcrumb.types'
 import { provideBreadcrumbs } from '@mts241alikhlash/web-shared/composables/useBreadcrumbs'
-import { toast } from 'vue-sonner'
-import { computed, reactive, ref } from 'vue'
+import { computed, ref } from 'vue'
 
-const { user, logoutUser, changePassword } = useAuthSession()
+const { user, logoutUser } = useAuthSession()
 const router = useRouter()
 const openSearch = ref(false)
 
 const isPasswordDialogOpen = ref(false)
-const isChangingPassword = ref(false)
-const passwordForm = reactive({
-  password: '',
-  confirmPassword: '',
-})
-const passwordErrors = reactive<Record<string, string>>({})
+const scrolled = ref(false)
+
+function handleScroll(event: Event) {
+  scrolled.value = (event.target as HTMLElement).scrollTop > 0
+}
 
 const ROLE_LABELS: Record<string, string> = {
   SUPER_ADMIN: 'Super Admin',
   ADMIN: 'Administrator',
-  EMPLOYEE: 'Pegawai',
+  TEACHER: 'Guru',
   STUDENT: 'Siswa',
 }
 
@@ -94,76 +80,8 @@ const userData = computed(() => ({
   avatar: user.value?.profile?.avatar ?? '',
 }))
 
-const initials = computed(() => {
-  return (
-    userData.value.name
-      .split(' ')
-      .slice(0, 2)
-      .map((word) => word[0])
-      .join('')
-      .toUpperCase() || '?'
-  )
-})
-
 function openPasswordDialog() {
-  resetPasswordForm()
   isPasswordDialogOpen.value = true
-}
-
-function resetPasswordForm() {
-  passwordForm.password = ''
-  passwordForm.confirmPassword = ''
-  Object.keys(passwordErrors).forEach((k) => delete passwordErrors[k])
-}
-
-function validatePasswordForm() {
-  const errors: Record<string, string> = {}
-
-  if (!passwordForm.password) {
-    errors.password = 'Password baru wajib diisi.'
-  } else if (passwordForm.password.length < 6) {
-    errors.password = 'Password baru minimal 6 karakter.'
-  }
-
-  if (!passwordForm.confirmPassword) {
-    errors.confirmPassword = 'Konfirmasi password wajib diisi.'
-  }
-
-  if (passwordForm.confirmPassword !== passwordForm.password) {
-    errors.confirmPassword = 'Konfirmasi password belum sama.'
-  }
-
-  Object.assign(passwordErrors, errors)
-  Object.keys(passwordErrors).forEach((key) => {
-    if (!(key in errors)) delete passwordErrors[key]
-  })
-
-  return Object.keys(errors).length === 0
-}
-
-async function handleChangePassword() {
-  if (!validatePasswordForm()) return
-
-  const userId = user.value?.id
-  if (!userId) {
-    toast.error('Sesi tidak valid', {
-      description: 'Silakan login ulang sebelum mengganti password.',
-    })
-    return
-  }
-
-  isChangingPassword.value = true
-  try {
-    const result = await changePassword(userId, {
-      password: passwordForm.password,
-    })
-    if (result.success) {
-      isPasswordDialogOpen.value = false
-      resetPasswordForm()
-    }
-  } finally {
-    isChangingPassword.value = false
-  }
 }
 
 async function handleLogout() {
@@ -172,9 +90,7 @@ async function handleLogout() {
 }
 
 function handleViewProfile() {
-  window.location.assign(
-    ssoService.accountsUrl(`/profile?from=${authConfig.value.ssoApp}`),
-  )
+  void router.push({ name: 'profile-view' })
 }
 
 const props = withDefaults(
@@ -208,231 +124,139 @@ const searchGroups = computed(() => {
 </script>
 
 <template>
-  <SidebarProvider>
+  <SidebarProvider
+    class="h-svh pt-12"
+    style="--sidebar-offset: 3rem; --sidebar-width: 11rem"
+  >
+    <header
+      data-app-topbar
+      class="fixed inset-x-0 top-0 z-20 flex h-12 items-center gap-2 bg-background px-3"
+    >
+      <SidebarTrigger
+        class="size-8 shrink-0 md:hidden"
+        aria-label="Buka menu"
+      >
+        <Menu class="size-4" />
+      </SidebarTrigger>
+      <div class="max-md:absolute max-md:left-1/2 max-md:-translate-x-1/2">
+        <HeaderAppSwitcher />
+      </div>
+      <div class="ml-auto flex shrink-0 items-center gap-2">
+        <Button
+          variant="ghost"
+          size="icon"
+          aria-label="Cari halaman"
+          class="hidden size-8 rounded-full bg-muted transition-colors hover:bg-muted/80 md:inline-flex"
+          @click="openSearch = true"
+        >
+          <Search class="size-4" />
+        </Button>
+
+        <CommandDialog v-model:open="openSearch">
+          <CommandInput placeholder="Ketik pencarian..." />
+          <CommandList>
+            <CommandEmpty>Tidak ada hasil yang ditemukan.</CommandEmpty>
+            <CommandGroup
+              v-for="group in searchGroups"
+              :key="group.heading"
+              :heading="group.heading"
+            >
+              <CommandItem
+                v-for="item in group.items"
+                :key="item.title"
+                :value="item.title"
+                @select="
+                  () => {
+                    router.push(item.url)
+                    openSearch = false
+                  }
+                "
+              >
+                {{ item.title }}
+              </CommandItem>
+            </CommandGroup>
+          </CommandList>
+        </CommandDialog>
+
+        <NavUser
+          compact
+          :user="userData"
+          @view-profile="handleViewProfile"
+          @change-password="openPasswordDialog"
+          @logout="handleLogout"
+        />
+      </div>
+    </header>
     <TooltipProvider :delay-duration="100">
       <AppSidebar />
-      <main
-        class="relative flex w-full flex-1 flex-col bg-background overflow-hidden h-svh content-container"
+      <SidebarInset
+        class="h-[calc(100svh-3rem-0.5rem)] overflow-hidden peer-data-[variant=inset]:mt-0"
       >
         <header
-          class="flex h-14 shrink-0 items-center gap-2 transition-[width,height] ease-linear border-b bg-card"
+          class="flex h-8 min-w-0 shrink-0 items-center gap-2 border-b px-4 transition-colors sm:px-6"
+          :class="scrolled ? 'border-border' : 'border-transparent'"
         >
-          <div class="flex items-center gap-2 px-4">
-            <SidebarTrigger class="-ml-1" />
-            <Separator
-              orientation="vertical"
-              class="mr-2 data-[orientation=vertical]:h-4"
-            />
-            <slot name="breadcrumb">
-              <Breadcrumb>
-                <BreadcrumbList>
-                  <template v-if="resolvedBreadcrumbs.length > 0">
-                    <template
-                      v-for="(item, index) in resolvedBreadcrumbs"
-                      :key="index"
-                    >
-                      <BreadcrumbItem
-                        :class="{
-                          'hidden md:block':
-                            index < resolvedBreadcrumbs.length - 1,
-                        }"
-                      >
-                        <BreadcrumbPage
-                          v-if="index === resolvedBreadcrumbs.length - 1"
-                          class="block max-w-48 truncate font-medium text-primary sm:max-w-xs"
-                        >
-                          {{ item.title }}
-                        </BreadcrumbPage>
-                        <BreadcrumbLink
-                          v-else-if="item.href"
-                          :href="item.href"
-                          class="block max-w-40 truncate"
-                        >
-                          {{ item.title }}
-                        </BreadcrumbLink>
-                        <span v-else>{{ item.title }}</span>
-                      </BreadcrumbItem>
-                      <BreadcrumbSeparator
-                        v-if="index < resolvedBreadcrumbs.length - 1"
-                        :class="{
-                          'hidden md:block':
-                            index < resolvedBreadcrumbs.length - 1,
-                        }"
-                      />
-                    </template>
-                  </template>
-                </BreadcrumbList>
-              </Breadcrumb>
-            </slot>
-          </div>
-          <div class="ml-auto flex items-center gap-4 px-6 lg:px-8">
-            <Button
-              variant="ghost"
-              size="icon"
-              class="relative h-8 w-8 rounded-full bg-muted hover:bg-muted/80 transition-colors"
-              @click="openSearch = true"
-            >
-              <Search class="size-4" />
-            </Button>
-
-            <CommandDialog v-model:open="openSearch">
-              <CommandInput placeholder="Ketik pencarian..." />
-              <CommandList>
-                <CommandEmpty>Tidak ada hasil yang ditemukan.</CommandEmpty>
-                <CommandGroup
-                  v-for="group in searchGroups"
-                  :key="group.heading"
-                  :heading="group.heading"
-                >
-                  <CommandItem
-                    v-for="item in group.items"
-                    :key="item.title"
-                    :value="item.title"
-                    @select="
-                      () => {
-                        router.push(item.url)
-                        openSearch = false
-                      }
-                    "
+          <slot name="breadcrumb">
+            <Breadcrumb class="min-w-0">
+              <BreadcrumbList class="min-w-0 flex-nowrap">
+                <template v-if="resolvedBreadcrumbs.length > 0">
+                  <template
+                    v-for="(item, index) in resolvedBreadcrumbs"
+                    :key="index"
                   >
-                    {{ item.title }}
-                  </CommandItem>
-                </CommandGroup>
-              </CommandList>
-            </CommandDialog>
-
-            <AppSwitcher />
-
-            <DropdownMenu>
-              <DropdownMenuTrigger as-child>
-                <Button
-                  variant="ghost"
-                  class="relative h-8 w-8 rounded-full"
-                >
-                  <Avatar class="h-8 w-8 rounded-full border border-border">
-                    <AvatarImage
-                      :src="userData.avatar"
-                      :alt="userData.name"
+                    <BreadcrumbItem
+                      :class="{
+                        'hidden md:block':
+                          index < resolvedBreadcrumbs.length - 1,
+                      }"
+                    >
+                      <BreadcrumbPage
+                        v-if="index === resolvedBreadcrumbs.length - 1"
+                        class="block max-w-28 truncate sm:max-w-xs"
+                      >
+                        {{ item.title }}
+                      </BreadcrumbPage>
+                      <BreadcrumbLink
+                        v-else-if="item.href"
+                        :href="item.href"
+                        class="block max-w-40 truncate"
+                      >
+                        {{ item.title }}
+                      </BreadcrumbLink>
+                      <span v-else>{{ item.title }}</span>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator
+                      v-if="index < resolvedBreadcrumbs.length - 1"
+                      class="hidden md:block"
                     />
-                    <AvatarFallback>{{ initials }}</AvatarFallback>
-                  </Avatar>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                class="w-56"
-                align="end"
-                :side-offset="8"
-              >
-                <DropdownMenuLabel class="font-normal">
-                  <div class="flex flex-col space-y-1">
-                    <p class="text-sm font-semibold leading-none">
-                      {{ userData.name }}
-                    </p>
-                    <p class="text-xs leading-none text-muted-foreground">
-                      {{ userData.email }}
-                    </p>
-                  </div>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuGroup>
-                  <DropdownMenuItem @click="handleViewProfile">
-                    <UserRound class="size-4 mr-2" />
-                    <span>Lihat Profil</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem @click="openPasswordDialog">
-                    <KeyRound class="size-4 mr-2" />
-                    <span>Ganti Password</span>
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem
-                  class="text-destructive focus:text-destructive focus:bg-destructive/10 cursor-pointer"
-                  @click="handleLogout"
-                >
-                  <LogOut class="size-4 mr-2" />
-                  <span>Logout</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
+                  </template>
+                </template>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </slot>
         </header>
-        <div class="flex-1 overflow-auto min-w-0">
+        <div
+          data-app-scroll
+          class="min-h-0 min-w-0 flex-1 overflow-auto"
+          @scroll="handleScroll"
+        >
           <slot><RouterView /></slot>
         </div>
-      </main>
+      </SidebarInset>
     </TooltipProvider>
   </SidebarProvider>
 
   <Dialog v-model:open="isPasswordDialogOpen">
-    <DialogContent>
+    <DialogContent class="max-h-[calc(100dvh-2rem)] overflow-y-auto">
       <DialogHeader>
         <DialogTitle>Ganti Password</DialogTitle>
         <DialogDescription
-          >Masukkan password baru untuk akun Anda.</DialogDescription
+          >Masukkan password saat ini dan password baru untuk akun
+          Anda.</DialogDescription
         >
       </DialogHeader>
 
-      <div class="grid gap-4 py-2">
-        <div class="grid gap-2">
-          <Label for="new-password">Password Baru</Label>
-          <Input
-            id="new-password"
-            v-model="passwordForm.password"
-            type="password"
-            autocomplete="new-password"
-            :class="
-              passwordErrors.password
-                ? 'border-destructive focus-visible:ring-destructive'
-                : ''
-            "
-            @input="delete passwordErrors.password"
-          />
-          <p
-            v-if="passwordErrors.password"
-            class="text-xs text-destructive"
-          >
-            {{ passwordErrors.password }}
-          </p>
-        </div>
-
-        <div class="grid gap-2">
-          <Label for="confirm-password">Konfirmasi Password</Label>
-          <Input
-            id="confirm-password"
-            v-model="passwordForm.confirmPassword"
-            type="password"
-            autocomplete="new-password"
-            :class="
-              passwordErrors.confirmPassword
-                ? 'border-destructive focus-visible:ring-destructive'
-                : ''
-            "
-            @input="delete passwordErrors.confirmPassword"
-          />
-          <p
-            v-if="passwordErrors.confirmPassword"
-            class="text-xs text-destructive"
-          >
-            {{ passwordErrors.confirmPassword }}
-          </p>
-        </div>
-      </div>
-
-      <DialogFooter>
-        <Button
-          variant="outline"
-          :disabled="isChangingPassword"
-          @click="isPasswordDialogOpen = false"
-        >
-          Batal
-        </Button>
-        <Button
-          :disabled="isChangingPassword"
-          @click="handleChangePassword"
-        >
-          {{ isChangingPassword ? 'Menyimpan...' : 'Simpan Password' }}
-        </Button>
-      </DialogFooter>
+      <ChangePasswordSection v-if="isPasswordDialogOpen" />
     </DialogContent>
   </Dialog>
 </template>

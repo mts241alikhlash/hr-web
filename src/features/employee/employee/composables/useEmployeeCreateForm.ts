@@ -127,7 +127,7 @@ export function useEmployeeCreateForm() {
       { fields: PROFIL_FIELDS, unlocksStep: 2 },
       { fields: KEPEG_FIELDS, unlocksStep: 3 },
     ],
-    onCancel: () => void router.push('/employees'),
+    onCancel: () => void router.push('/staff'),
   })
 
   function isValidPosition(p: EmployeePositionInput): boolean {
@@ -169,7 +169,7 @@ export function useEmployeeCreateForm() {
       if (result.userId) {
         void router.push(`/profile/EMPLOYEE/${result.userId}`)
       } else {
-        void router.push('/employees')
+        void router.push('/staff')
       }
     } finally {
       submitting.value = false

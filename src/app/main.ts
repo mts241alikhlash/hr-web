@@ -15,6 +15,8 @@ configureAuth({
   appSubtitle: 'Kepegawaian, Presensi & Penggajian',
   logoAlt: 'Logo 241 HR',
   loginTitle: 'Masuk ke 241 HR',
+  loginSubtitle: 'Kepegawaian, presensi, dan penggajian madrasah.',
+  identifierLabel: 'Nama pengguna',
   homeRoute: '/dashboard',
   ssoApp: 'hr',
 })

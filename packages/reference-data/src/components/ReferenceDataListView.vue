@@ -65,7 +65,7 @@ onMounted(() => {
 <template>
   <Card
     gap="none"
-    class="overflow-hidden rounded-2xl shadow-sm shadow-black/5 ring-1 ring-black/4"
+    class="overflow-visible rounded-none border-0 bg-transparent shadow-none ring-0"
   >
     <CardHeader standard>
       <CardTitle size="lg">

@@ -79,12 +79,15 @@ onMounted(() => void deviceService.fetch())
 </script>
 
 <template>
-  <div class="p-4 md:p-6 lg:p-8">
+  <div class="px-4 pb-4 pt-1 sm:px-6 sm:pb-6 sm:pt-2">
     <Card
       gap="none"
-      class="overflow-hidden rounded-2xl shadow-sm shadow-black/5 ring-1 ring-black/4"
+      class="overflow-visible rounded-none border-0 bg-transparent shadow-none ring-0"
     >
-      <CardHeader standard>
+      <CardHeader
+        standard
+        class="min-h-0 border-b-0 bg-transparent px-0 pt-0 pb-3 sm:px-0"
+      >
         <CardTitle size="lg"> Perangkat Gerbang </CardTitle>
         <Button @click="showForm = true">
           <Plus class="mr-2 h-4 w-4" />
@@ -92,10 +95,7 @@ onMounted(() => void deviceService.fetch())
         </Button>
       </CardHeader>
 
-      <CardContent
-        variant="standard"
-        class="space-y-6"
-      >
+      <CardContent class="space-y-6 p-0 sm:px-0">
         <div
           v-if="lastIssued"
           class="space-y-3 rounded-lg border border-amber-300 bg-amber-50 p-4 text-amber-900 dark:border-amber-900 dark:bg-amber-950 dark:text-amber-200"

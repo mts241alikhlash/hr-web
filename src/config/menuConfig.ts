@@ -48,13 +48,13 @@ export const menuSections: MenuSection[] = [
     items: [
       {
         title: 'menu.employeeList',
-        url: '/employees',
+        url: '/staff',
         icon: Users,
         requiredPermission: 'employees.read',
       },
       {
         title: 'menu.employeeAccounts',
-        url: '/employees/accounts',
+        url: '/staff/accounts',
         icon: IdCard,
         requiredPermission: 'users.read',
       },
@@ -64,12 +64,12 @@ export const menuSections: MenuSection[] = [
         url: '#',
         icon: BriefcaseBusiness,
         items: [
-          { title: 'menu.position', url: '/positions' },
+          { title: 'menu.position', url: '/job-positions' },
           {
             title: 'menu.positionCategory',
-            url: '/position-categories',
+            url: '/job-categories',
           },
-          { title: 'menu.employmentType', url: '/employment-types' },
+          { title: 'menu.employmentType', url: '/contract-types' },
         ],
       },
     ],

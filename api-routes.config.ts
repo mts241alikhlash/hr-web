@@ -34,7 +34,7 @@ export const SERVICE_PREFIXES = {
   ],
 } as const
 
-export const UNROUTED_PREFIXES: readonly string[] = ['/dashboard', '/settings']
+export const UNROUTED_PREFIXES: readonly string[] = ['/settings']
 
 export const HEALTH_ROUTES = [
   { path: '/health/identity', service: 'identity' },

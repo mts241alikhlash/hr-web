@@ -44,7 +44,7 @@ useBreadcrumbs(() => {
 </script>
 
 <template>
-  <div class="space-y-6 p-4 md:p-6 lg:p-8">
+  <div class="space-y-6 p-4 sm:p-6">
     <div
       v-if="loading && !currentRun"
       class="text-muted-foreground py-12 text-center text-sm"

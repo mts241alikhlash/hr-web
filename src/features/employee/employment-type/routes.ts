@@ -2,7 +2,7 @@
 
 export const employmentTypeRoutes: RouteRecordRaw[] = [
   {
-    path: '/employment-types',
+    path: '/contract-types',
     name: 'EmploymentTypeList',
     component: () => import('./views/EmploymentTypeListView.vue'),
     meta: {
@@ -11,7 +11,7 @@ export const employmentTypeRoutes: RouteRecordRaw[] = [
       requiredPermission: 'employees.read',
       breadcrumbs: [
         { title: 'Pengaturan', href: '#' },
-        { title: 'Status Kepegawaian', href: '/employment-types' },
+        { title: 'Status Kepegawaian', href: '/contract-types' },
       ],
     },
   },

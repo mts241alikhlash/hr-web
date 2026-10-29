@@ -2,7 +2,7 @@
 
 export const positionCategoryRoutes: RouteRecordRaw[] = [
   {
-    path: '/position-categories',
+    path: '/job-categories',
     name: 'PositionCategoryList',
     component: () => import('./views/PositionCategoryListView.vue'),
     meta: {
@@ -11,7 +11,7 @@ export const positionCategoryRoutes: RouteRecordRaw[] = [
       requiredPermission: 'positions.read',
       breadcrumbs: [
         { title: 'Pengaturan', href: '#' },
-        { title: 'Kategori Jabatan', href: '/position-categories' },
+        { title: 'Kategori Jabatan', href: '/job-categories' },
       ],
     },
   },
